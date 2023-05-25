@@ -214,24 +214,51 @@
           <img src="/resource/bootstrap/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info mt-2 " style="background-color:#5865F2; margin-left:15px; ">
-          <div class="d-block" style="color:white;">사용자이름</div>
-          <div class="d-block" style="color:white;">사용자부서</div>
-          <div class="d-block" style="color:white;">사용자상태</div>
+          <div class="d-block" style="color:white;">${loginUser.member_name }</div>
+          <div class="d-block" style="color:white;">${loginUser.member_department1 }</div>
+         
+         <div class="d-block" style="color:white;">
+    <c:if test="${not empty loginUser}">
+        <span id="memberStatusDisplay">
+            <c:set var="memberStatus" value="${loginUser.member_status}" />
+            <c:choose>
+                <c:when test="${memberStatus eq 1}">
+                    출근
+                </c:when>
+                <c:when test="${memberStatus eq 2}">
+                    퇴근
+                </c:when>
+                <c:when test="${memberStatus eq 3}">
+                    자리비움
+                </c:when>
+                <c:when test="${memberStatus eq 4}">
+                    휴가
+                </c:when>
+                <c:when test="${memberStatus eq 5}">
+                    조퇴
+                </c:when>
+                <c:otherwise>
+                    상태 없음
+                </c:otherwise>
+            </c:choose>
+        </span>
+    </c:if>
+</div>
+
         </div>
 
-       	<div class="select-group-wrap" style="display:block; margin-left:15px; margin-top:5px;">
-           <select class="form-control" name="perPageNum" id="perPageNum" onchange="">                               
-           	<option value="" selected="상태">상태</option>
+       <div class="select-group-wrap" style="display:block; margin-left:15px; margin-top:5px;">
+    <select class="form-control" name="perPageNum" id="perPageNum" onchange="updateMemberStatusDisplay()">
+        <option value="" selected="상태">상태</option>
+        <option value="1">출근</option>
+        <option value="2">퇴근</option>
+        <option value="3">자리비움</option>
+    </select>
+</div>
 
-            <option value="">출근</option>
-            <option value="">퇴근</option>
-            <option value="">자리비움</option>
-           </select>
-        </div>
-             <button onclick="" class="btn btn-sidebar" style="margin-left:5px; margin-top:5px; background-color:#AAAAAA;">상태변경</button>
-
-		       <button onclick="" class="btn btn-sidebar" style="margin-left:15px; margin-top:5px; background-color:#AAAAAA;">마이페이지</button>
-		      <button onclick="logout()" class="btn btn-sidebar" style="margin-left:15px; margin-top:5px; background-color:#AAAAAA;">로그아웃</button>
+<button onclick="changeStatus()" class="btn btn-sidebar" style="margin-left:5px; margin-top:5px; background-color:#AAAAAA;">상태변경</button>
+<button onclick="" class="btn btn-sidebar" style="margin-left:15px; margin-top:5px; background-color:#AAAAAA;">마이페이지</button>
+<button onclick="logout()" class="btn btn-sidebar" style="margin-left:15px; margin-top:5px; background-color:#AAAAAA;">로그아웃</button>
 
       </div>
 
@@ -452,7 +479,86 @@
   </aside>
   
   <script>
-function logout() {
-  window.location.href = '/common/logout';
-}
+  function logout() {
+	
+	  $.ajax({
+	    url: '/common/logout',
+	    type: 'GET',
+	    data: {
+	    	  attendence_member: '${loginUser.member_id}',
+	    	  member_team: '${loginUser.member_team}',
+	    	  member_department: '${loginUser.member_department}'
+	    	},
+	    success: function(response) {
+	     
+	      console.log(response);
+	      
+	     
+	      window.location.href = "/common/logout";
+	    },
+	    error: function(error) {
+	      
+	      console.log(error);
+	      window.location.href = "/common/logout";
+	    }
+	  });
+	}
+
 </script>
+
+
+
+<script>
+function updateMemberStatusDisplay() {
+    var selectedStatus = $("#perPageNum").val();
+    var memberStatusDisplay = $("#memberStatusDisplay");
+
+    if (selectedStatus === "") {
+        memberStatusDisplay.text("출근");
+    } else {
+        switch (selectedStatus) {
+            case "1":
+                memberStatusDisplay.text("출근");
+                break;
+            case "2":
+                memberStatusDisplay.text("퇴근");
+                break;
+            case "3":
+                memberStatusDisplay.text("자리비움");
+                break;
+            default:
+                memberStatusDisplay.text("상태 없음");
+        }
+    }
+}
+
+function changeStatus() {
+    var selectedStatus = $("#perPageNum").val();
+
+    $.ajax({
+        url: "/common/changeStatus",
+        type: "POST",
+        data: {
+            memberStatus: selectedStatus
+        },
+        success: function(response) {
+            console.log(response);
+            
+            // Update memberStatusDisplay after successful response
+            updateMemberStatusDisplay(memberStatus);
+            
+            window.location.href = "/usr/home/main";
+        },
+        error: function(error) {
+            console.log(error);
+            window.location.href = "/usr/home/main";
+        }
+    });
+}
+
+// Call updateMemberStatusDisplay on page load to initialize the member status display
+$(document).ready(function() {
+    updateMemberStatusDisplay();
+});
+</script>
+

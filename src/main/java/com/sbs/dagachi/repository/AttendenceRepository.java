@@ -79,4 +79,9 @@ public interface AttendenceRepository {
 	
 	//팀별상세 이름으로 해당사원의 날짜별 리스트 가져오기
 	public List<Map<String,Object>>getMemberNameTotalList(String member_name);
+
+	public void attendenceInsert(String attendence_member, int attendence_status, Integer attendence_month_vacation_cnt,
+            Integer attendence_year_vacation_cnt, String attendence_regDate, String member_department,
+            String member_team);
+
 }

@@ -62,6 +62,12 @@ public class MemberService {
 	public List<Member> getDepartmentRepresentative(@Param("member_department")int member_department){
 	      return memberRepository.getDepartmentRepresentative(member_department);
 	   }
+
+	public void updateMemberStatus( String member_status,String member_id) {
+		memberRepository.updateMemberStatus( member_status,member_id);
+		
+		 System.out.println("########"+member_id+member_status);
+	}
 	
 	
 	

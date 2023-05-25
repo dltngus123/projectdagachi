@@ -40,6 +40,12 @@
       FROM MEMBER
       where member_team1=#{team}
 </select>
+
+<update id="updateMemberStatus">
+update member
+		set member_status=#{member_status}
+		where member_id=#{member_id}
+</update>
    
 
 </mapper>

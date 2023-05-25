@@ -4,11 +4,11 @@
 	namespace="com.sbs.dagachi.repository.VacationRepository">
 
 <select id="getTotalYear" resultType="Integer">
-	SELECT SUM(year_vacation_count) AS total_count
+	SELECT COALESCE(SUM(year_vacation_count), 0) AS total_count
 	FROM vacation
 	LEFT JOIN MEMBER AS M ON vacation_member = M.MEMBER_ID
-	WHERE
-	vacation_member = #{vacation_member}
+	WHERE vacation_member = #{vacation_member}
+
 </select>
 
 <select id="getDelYear" resultType="int">
@@ -19,7 +19,7 @@
 </select>
 
 <select id="getTotalMonth" resultType="int">
-	SELECT SUM(month_vacation_count) AS total_count
+	SELECT COALESCE(SUM(month_vacation_count),0) AS total_count
 	FROM vacation
 	LEFT JOIN MEMBER AS M ON vacation_member = M.MEMBER_ID
 	WHERE

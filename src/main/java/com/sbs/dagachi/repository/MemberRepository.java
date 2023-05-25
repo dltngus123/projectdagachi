@@ -21,5 +21,7 @@ public interface MemberRepository {
 	public List<Member> getDepartmentRepresentative(@Param("member_department")int member_department);
 	
 	List<Member> getMemberListByTeam(int team);
+
+	public void updateMemberStatus(String member_status,String member_id );
 	
 }

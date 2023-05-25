@@ -151,4 +151,13 @@ public class AttendenceService {
 		return memberRepository.getDepartmentRepresentative(member_department);
 
 	}
+
+
+
+	public void attendenceInsert(String attendence_member, int member_status, Integer attendece_month_vacation_cnt,
+			Integer attendence_year_vacation_cnt, String attendence_regDate, String member_department,
+			String member_team) {
+		 attendenceRepository.attendenceInsert(attendence_member,member_status,attendece_month_vacation_cnt,attendence_year_vacation_cnt,attendence_regDate,member_department,member_team);
+		 System.out.println("@@@@@@@@@@@@"+attendence_member+member_status+attendece_month_vacation_cnt+attendence_year_vacation_cnt+attendence_regDate+member_department+member_team);
+	}
 }

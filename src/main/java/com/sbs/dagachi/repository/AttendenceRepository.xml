@@ -587,5 +587,17 @@ WHERE
   AND TIME(attendence_regdate) &lt;= '18:00:00' 
   AND attendence_status IN (1, 2, 3, 4, 5, 6, 7)
 </select>
+
+<insert id="attendenceInsert" parameterType="map">
+    INSERT INTO attendance
+    SET
+    attendence_member = #{attendence_member},
+    attendence_status = #{attendence_status},
+    attendence_month_vacation_cnt = #{attendence_month_vacation_cnt},
+    attendence_year_vacation_cnt = #{attendence_year_vacation_cnt},
+    attendence_regdate = now(),
+    member_department = #{member_department},
+    member_team = #{member_team}
+</insert>
 	
 </mapper> 
