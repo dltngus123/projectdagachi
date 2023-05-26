@@ -1,5 +1,6 @@
 package com.sbs.dagachi.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -23,5 +24,9 @@ public interface MemberRepository {
 	List<Member> getMemberListByTeam(int team);
 
 	public void updateMemberStatus(String member_status,String member_id );
+	
+	void registMember(String member_id, String member_pwd, String member_name, String member_phone, String member_email,
+	         String member_address, int member_dep, int member_team, String member_dep1, String member_team1, String member_rank,
+	          Date member_birth, int member_auth, String member_pic);
 	
 }

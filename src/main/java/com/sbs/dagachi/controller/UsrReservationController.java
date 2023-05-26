@@ -172,22 +172,66 @@ public class UsrReservationController {
 	
 	@RequestMapping("/reservation/modify")
 	@ResponseBody
-	public double modifyReservation(@RequestBody Map<String, String> requestData) {
-	String room_code = requestData.get("room_code");
-	String reservation_start = requestData.get("reservation_start");
-	String reservation_end = requestData.get("reservation_end");
-	String reservation_title = requestData.get("reservation_title");
-	String reservation_code = requestData.get("reservation_code");
-	
-	  System.out.println("!!!!!!!!!"+room_code);
-	  System.out.println("!!!!!!!!!"+reservation_start);
-	  System.out.println("!!!!!!!!!"+reservation_end);
-	  System.out.println("!!!!!!!!!"+reservation_title);
-	  System.out.println("!!!!!!!!!"+reservation_code);
-	  
-	  reservationService.reservationmodify(room_code, reservation_start, reservation_end, reservation_title, reservation_code);
-	  return 0;
+	public String modifyReservation(HttpSession session, @RequestBody Map<String, String> requestData) {
+	    String room_code = requestData.get("room_code");
+	    String reservation_start = requestData.get("reservation_start");
+	    String reservation_end = requestData.get("reservation_end");
+	    String reservation_title = requestData.get("reservation_title");
+	    String reservation_code = requestData.get("reservation_code");
+
+	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+	    Date reservation_start_date;
+	    Date reservation_end_date;
+
+	    try {
+	        reservation_start_date = format.parse(reservation_start);
+	        reservation_end_date = format.parse(reservation_end);
+	    } catch (ParseException e) {
+	        e.printStackTrace();
+	        return "error";
+	    }
+
+	    System.out.println(reservation_start_date);
+	    System.out.println(reservation_end_date);
+	    System.out.println(room_code);
+
+	    Member loginUser = (Member) session.getAttribute("loginUser");
+	    String reservation_member = loginUser.getMember_id();
+
+	    if (!loginUser.getMember_id().equals(reservation_member)) {
+	        return "error";
+	    }
+
+	    if (reservationService.isOverlappingEvents(room_code, reservation_start, reservation_end)) {
+	        if (loginUser.getMember_id().equals(reservation_member)) {
+	            // loginUser.getMember_id() and reservation_member are the same, consider it a success
+	            reservationService.reservationmodify(room_code, reservation_start, reservation_end, reservation_title, reservation_code);
+	            return "success";
+	        }
+	        	return "isOverlappingEventserror";
+	       
+	    }
+
+	    if (reservationService.hasExistingReservations(room_code)) {
+	        List<Reservation> existingReservations = reservationService.getReservationsByRoom(room_code);
+	        for (Reservation existingReservation : existingReservations) {
+	            Date existingStart = existingReservation.getReservation_start();
+	            Date existingEnd = existingReservation.getReservation_end();
+
+	            if (existingStart.equals(reservation_start_date) || existingEnd.equals(reservation_end_date) ||
+	                    (existingStart.before(reservation_end_date) && existingEnd.after(reservation_start_date))) {
+	            	System.out.println("test11");
+	            	return "isOverlappingEventserror";
+	            }
+	          
+	        }
+	    }
+
+
+	    reservationService.reservationmodify(room_code, reservation_start, reservation_end, reservation_title, reservation_code);
+	    return "success";
 	}
+
 
 	@RequestMapping("/reservation/delete")
 	@ResponseBody

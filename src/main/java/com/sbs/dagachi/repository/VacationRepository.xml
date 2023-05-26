@@ -12,7 +12,7 @@
 </select>
 
 <select id="getDelYear" resultType="int">
-	SELECT SUM(del_year_vacation_count) AS total_count
+	SELECT  COALESCE(SUM(del_year_vacation_count),0) AS total_count
 	FROM vacation
 	LEFT JOIN MEMBER AS M ON vacation_member = M.MEMBER_ID
 	WHERE vacation_member = #{vacation_member}
@@ -27,7 +27,7 @@
 </select>
 
 <select id="getDelMonth" resultType="int">
-	SELECT SUM(del_month_vacation_count) AS total_count
+	SELECT  COALESCE(SUM(del_month_vacation_count),0) AS total_count
 	FROM vacation
 	LEFT JOIN MEMBER AS M ON vacation_member = M.MEMBER_ID
 	WHERE vacation_member = #{vacation_member}

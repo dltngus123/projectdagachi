@@ -169,8 +169,8 @@ public class UsrApprovalController {
 	
 	
 	@PostMapping("regist")
-	@ResponseBody
-	public void regist(HttpSession session,String approver1,String approver2,String approver3,String title,String content, String save,String level,String form) {
+
+	public String regist(HttpSession session,String approver1,String approver2,String approver3,String title,String content, String save,String level,String form) {
 	
 		Member member= (Member)session.getAttribute("loginUser");
 		String user=member.getMember_id();
@@ -189,6 +189,7 @@ public class UsrApprovalController {
 		ad.setApproval_register(user);
 		
 		approval_documentService.insertA_document(ad);
+		return "/approval/main";
 		
 	}
 	@GetMapping("detail")

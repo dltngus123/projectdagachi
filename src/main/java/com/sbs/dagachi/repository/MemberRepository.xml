@@ -38,7 +38,7 @@
    <select id="getMemberListByTeam" resultType="Member">
       SELECT *
       FROM MEMBER
-      where member_team1=#{team}
+      where member_team=#{team}
 </select>
 
 <update id="updateMemberStatus">
@@ -46,6 +46,17 @@ update member
 		set member_status=#{member_status}
 		where member_id=#{member_id}
 </update>
+
+<insert id="registMember">
+      
+      insert into `member`
+      set
+      member_id=#{member_id}, member_pwd=#{member_pwd}, member_name=#{member_name},
+      member_email=#{member_email}, member_address=#{member_address}, member_regDate=now(), member_phone=#{member_phone},
+      member_department=#{member_dep}, member_department1=#{member_dep1}, member_team=#{member_team},member_team1=#{member_team1},
+      member_rank=#{member_rank}, member_status=1, member_birth=#{member_birth}, member_auth=#{member_auth}, member_pic=#{member_pic}
+         
+   </insert>
    
 
 </mapper>

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@include file="/WEB-INF/jsp/include/openhead.jsp"%>
+<%@include file="/WEB-INF/jsp/include/openhead.jspf"%>
 	<div class="wrapper col-12" style="background: #f9f9f9;">
 	<section class="content-header">
         <div class="container-fluid">
@@ -136,7 +136,7 @@
      
      
 	</div>
-<%@include file="/WEB-INF/jsp/include/openfoot.jsp"%>
+<%@include file="/WEB-INF/jsp/include/openfoot.jspf"%>
 <script>
 	function inputPhone(){
 	/* 

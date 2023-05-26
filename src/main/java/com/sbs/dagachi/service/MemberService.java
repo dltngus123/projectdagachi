@@ -1,5 +1,6 @@
 package com.sbs.dagachi.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -68,7 +69,14 @@ public class MemberService {
 		
 		 System.out.println("########"+member_id+member_status);
 	}
-	
+	public void registMember(String member_id, String member_pwd, String member_name, String member_phone, String member_email,
+	         String member_address, int member_dep, int member_team, String member_dep1, String member_team1, String member_rank,
+	          Date member_birth, int member_auth, String member_pic) {
+	      
+	      memberRepository.registMember(member_id, member_pwd, member_name,
+	            member_phone, member_email, member_address, member_dep, member_team, 
+	            member_dep1, member_team1, member_rank, member_birth, member_auth, member_pic);
+	   }
 	
 	
 	

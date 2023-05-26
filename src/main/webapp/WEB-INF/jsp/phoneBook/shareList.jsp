@@ -126,7 +126,7 @@
       <c:set var="pageMenuArmLen" value="4" />
       <c:set var="startPage" value="${page - pageMenuArmLen < 1 ? 1 : page - pageMenuArmLen}" />
       <c:set var="endPage" value="${page + pageMenuArmLen > pagesCount ? pagesCount : page + pageMenuArmLen}" />
-      <c:set var="pageBaseUri" value="searchType=${param.searchType }&phone_book_type=${param.phone_book_type }&keyword=${param.keyword }&phone_book_register=${param.phone_book_register }" />
+      <c:set var="pageBaseUri" value="searchType=${param.searchType }&phone_book_type=${param.phone_book_type }&keyword=${param.keyword }&phone_book_register=${loginUser.member_id}" />
       <ul class="pagination justify-content-center m-0">
         <c:if test="${startPage > 1}">
           <li class="page-item">

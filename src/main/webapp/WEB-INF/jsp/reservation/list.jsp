@@ -616,7 +616,7 @@ if (starIcon.classList.contains('text-yellow')) {
     		    $("#calendarModifyModal").modal("show");
     		});
 
-    		$("#confirmModifyButton").click(function() {
+    	  $("#confirmModifyButton").click(function() {
     		    var reservationMember = $("#calendar_user_modify").val();
     		    var roomCode = $("#room_code_modify").val();
     		    var reservationTitle = $("#calendar_content_modify").val();
@@ -639,14 +639,35 @@ if (starIcon.classList.contains('text-yellow')) {
     		        data: JSON.stringify(updatedData),
     		        contentType: "application/json",
     		        success: function(response) {
-    		            alert("정상적으로 수정 되었습니다.");
-    		            location.reload();
+    		            if (response === "success") {
+    		                var eventData = {
+    		                    title: reservationTitle,
+    		                    start: reservationStart,
+    		                    end: reservationEnd
+    		                };
+    		                calendar.addEvent(eventData);
+    		                $("#calendarModifyModal").modal("hide");
+    		                location.reload();
+    		            } else if (response === "isOverlappingEventserror") {
+    		                alert("해당 회의실은 이미 예약된 시간과 겹칩니다. 다시 선택해주세요.");
+    		                $("#calendarModifyModal").modal("show");
+    		            } else if (response === "hasExistingReservationserror") {
+    		                alert("해당 회의실에는 이미 예약된 사람이 있습니다. 다시 선택해주세요.");
+    		                $("#calendarModifyModal").modal("show");
+    		            } else {
+    		                alert("서버 오류가 발생했습니다. 다시 시도해주세요.");
+    		                $("#calendarModifyModal").modal("hide");
+    		                location.reload();
+    		            }
     		        },
-    		        error: function(error) {
-    		            alert("입력한 값이 올바르지 않습니다.다시 입력후 시도해 주세요.");
+    		        error: function(xhr, textStatus, errorThrown) {
+    		            if (xhr.status !== 200) {
+    		                alert("해당 회의실은 이미 예약된 시간과 겹치거나 이미 예약된 정보가 있습니다. 다시 선택해주세요.");
+    		            }
     		        }
     		    });
     		});
+
 
 
     	});
