@@ -365,7 +365,7 @@
            aria-labelledby="headingFour" data-parent="#accordion">
   <div class="card-body">
     <div>
-      <a href="">공지사항</a>
+      <a href="/article/noticeList">공지사항</a>
     </div>
     <div>
       <a href="">공유 게시판</a>
