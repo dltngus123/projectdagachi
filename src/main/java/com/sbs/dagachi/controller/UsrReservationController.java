@@ -205,15 +205,17 @@ public class UsrReservationController {
 	    if (reservationService.isOverlappingEvents(room_code, reservation_start, reservation_end)) {
 	        if (loginUser.getMember_id().equals(reservation_member)) {
 	            // loginUser.getMember_id() and reservation_member are the same, consider it a success
+	        	System.out.println("test222222222222");
 	            reservationService.reservationmodify(room_code, reservation_start, reservation_end, reservation_title, reservation_code);
 	            return "success";
 	        }
-	        	return "isOverlappingEventserror";
+	        	
+	        
 	       
 	    }
 
-	    if (reservationService.hasExistingReservations(room_code)) {
-	        List<Reservation> existingReservations = reservationService.getReservationsByRoom(room_code);
+	    if (reservationService.getReservationsByRoomnotloginUser(room_code,reservation_member,reservation_code)) {
+	        List<Reservation> existingReservations = reservationService.getReservationsRoom(room_code,reservation_member);
 	        for (Reservation existingReservation : existingReservations) {
 	            Date existingStart = existingReservation.getReservation_start();
 	            Date existingEnd = existingReservation.getReservation_end();

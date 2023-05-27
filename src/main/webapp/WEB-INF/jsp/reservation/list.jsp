@@ -646,12 +646,13 @@ if (starIcon.classList.contains('text-yellow')) {
     		                    end: reservationEnd
     		                };
     		                calendar.addEvent(eventData);
+    		                alert("정상적으로 수정 되었습니다.")
     		                $("#calendarModifyModal").modal("hide");
     		                location.reload();
     		            } else if (response === "isOverlappingEventserror") {
     		                alert("해당 회의실은 이미 예약된 시간과 겹칩니다. 다시 선택해주세요.");
     		                $("#calendarModifyModal").modal("show");
-    		            } else if (response === "hasExistingReservationserror") {
+    		            } else if (response === "isOverlappingEventserror") {
     		                alert("해당 회의실에는 이미 예약된 사람이 있습니다. 다시 선택해주세요.");
     		                $("#calendarModifyModal").modal("show");
     		            } else {

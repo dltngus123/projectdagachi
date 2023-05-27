@@ -106,8 +106,28 @@ AND RESERVATION_START = #{reservation_start}
 AND RESERVATION_END =#{reservation_end}
 </select>
 
+<select id="isOverlappingEvent" resultType="reservation">
+SELECT *
+FROM RESERVATION
+WHERE ROOM_CODE=#{room_code}
+AND RESERVATION_START = #{reservation_start}
+AND RESERVATION_END =#{reservation_end}
+and reservation_code =#{reservation_code}
+</select>
+
 <select id="getReservationsByRoom" resultType="reservation">
 SELECT * FROM RESERVATION WHERE ROOM_CODE = #{room_code}
+</select>
+
+<select id="getReservationsRoom" resultType="reservation">
+SELECT * FROM RESERVATION WHERE ROOM_CODE = #{room_code}
+AND reservation_member != #{reservation_member}
+</select>
+
+<select id="getReservationsByRoomnotloginUser" resultType="reservation">
+SELECT * FROM RESERVATION WHERE ROOM_CODE = #{room_code}
+AND reservation_member != #{reservation_member}
+ AND reservation_code != #{reservation_code}
 </select>
 
 <select id="getEvent" resultType="reservation">

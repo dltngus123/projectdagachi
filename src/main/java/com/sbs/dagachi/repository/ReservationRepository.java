@@ -26,12 +26,18 @@ public interface ReservationRepository {
 	public int getLastInsertId();
 
 	public Reservation getoverlappingEvents(String room_code, String reservation_start, String reservation_end);
+	
+	public Reservation isOverlappingEvent(String room_code, String reservation_start, String reservation_end,String reservation_code);
 
 	public List<Reservation> getReservationsByRoom(String room_code);
+	
+	public List<Reservation> getReservationsByRoomnotloginUser(String room_code,String reservation_member,String reservation_code);
 	
 	public List<Reservation> getEvent(String reservation_code);
 	
 	public void reservationmodify(String room_code,String reservation_start, String reservation_end,String reservation_title,String reservation_code);
 
 	public void delete(String reservation_code);
+
+	public List<Reservation> getReservationsRoom(String room_code, String reservation_member);
 }

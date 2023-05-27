@@ -62,14 +62,28 @@ public class ReservationService {
 	    Reservation overlappingEvent = reservationRepository.getoverlappingEvents(room_code, reservation_start, reservation_end);
 	    return overlappingEvent != null;
 	}
+	
+	public boolean isOverlappingEvent(String room_code, String reservation_start, String reservation_end,String reservation_code) {
+	    Reservation overlappingEvent = reservationRepository.isOverlappingEvent(room_code, reservation_start, reservation_end,reservation_code);
+	    return overlappingEvent != null;
+	}
+
 
 	public boolean hasExistingReservations(String room_code) {
 	    List<Reservation> reservations = reservationRepository.getReservationsByRoom(room_code);
 	    return !reservations.isEmpty();
 	}
+	public boolean getReservationsByRoomnotloginUser(String room_code,String reservation_member,String reservation_code){
+		 List<Reservation> reservation = reservationRepository.getReservationsByRoomnotloginUser(room_code,reservation_member,reservation_code);
+		    return !reservation.isEmpty();
+	}
 
 	public List<Reservation> getReservationsByRoom(String room_code) {
 		return reservationRepository.getReservationsByRoom(room_code);
+	}
+	
+	public List<Reservation> getReservationsRoom(String room_code, String reservation_member) {
+		return reservationRepository.getReservationsRoom(room_code,reservation_member);
 	}
 	
 	public void reservationmodify(String room_code,String reservation_start, String reservation_end,String reservation_title,String reservation_code) {
