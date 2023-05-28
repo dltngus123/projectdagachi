@@ -23,4 +23,5 @@ public class Article {
 	private String member_department1;
 	private String member_team1;
 	private String member_rank;
+	
 }

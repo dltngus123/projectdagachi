@@ -27,6 +27,15 @@ public interface ArticleRepository {
 		    @Param("article_attach") String article_attach,
 		    @Param("article_important") String article_important
 		);
-	
+
 	public Article getArticleById(int articleId);
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

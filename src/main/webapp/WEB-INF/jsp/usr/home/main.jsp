@@ -234,31 +234,27 @@
                     <tr>
                       <th style="width:5%;">요청 번호</th>
                       <th>요청 제목</th>
-                      <th style="width:10%;">요청 날자</th>
-                      <th style="width:5%;">첨부파일</th>
+                      <th style="width:10%;">마감기한</th>
                       <th style="width:10%;">요청자</th>
                     </tr>
                   </thead>
                   <tbody>
                     <c:set var="count" value="0" />
 
-                    <c:forEach var="test" items="${tests}">
+                    <c:forEach var="test" items="${psList}">
                       <c:if test="${count lt 5}">
                         <tr>
-                          <td>${test.tno}</td>
-                          <td><a href="#" onclick="" style="color:black;">${test.title}</a></td>
-                          <td>${test.date}</td>
-                          <td style="text-align:center;">
-                            <c:if test="${test.type ne null}">
-                              <i class='fa fa-file'></i> <!-- Add your file icon element here -->
-                            </c:if>
-                          </td>
-                          <td>${test.name}</td>
+                          <td>${test.ps_Id}</td>
+                          <td><a href="/dagachi/projectS/list" onclick="" style="color:black;">${test.ps_title}</a></td>
+                          <fmt:formatDate value="${test.ps_EndDate}" var="endDate" pattern="yyyy.MM.dd"/>
+                          <td>${endDate}</td>
+                          
+                          <td>${test.ps_Sender}</td>
                         </tr>
                         <c:set var="count" value="${count + 1}" />
                       </c:if>
                     </c:forEach>
-                    <c:if test="${empty tests}">
+                    <c:if test="${empty psList}">
                       <tr>
                         <td colspan="8">받은 요청이 없습니다.</td>
                       </tr>
@@ -288,7 +284,7 @@
                       <c:if test="${count lt 5}">
                         <tr>
                           <td>${test.tno}</td>
-                          <td><a href="#" onclick="" style="color:black;">${test.title}</a></td>
+                          <td><a href="" onclick="" style="color:black;">${test.title}</a></td>
                           <td>${test.date}</td>
                           <td style="text-align:center;">
                             <c:if test="${test.type ne null}">
@@ -322,7 +318,6 @@
               <table class="table table-hover text-nowrap">
                 <thead>
                   <tr>
-                    <th style="width:20px;">번호</th>
                     <th>제목</th>
                     <th>진척도</th>
                   </tr>
@@ -330,21 +325,20 @@
                 <tbody>
                   <c:set var="count" value="0" />
 
-                  <c:forEach var="test" items="${tests}">
+                  <c:forEach var="pl" items="${plList}">
                     <c:if test="${count lt 5}">
                       <tr>
-                        <td>${test.tno}</td>
-                        <td><a href="#" onclick="" style="color:black;">${test.title}</a></td>
+                        <td><a href="/dagachi/projectM/list" onclick="" style="color:black;">${pl.pl_Name}</a></td>
                         <td>
                           <div class="progress">
-                            <div class="progress-bar" style="width: ${test.progress}%;" title="${test.progress}% 완료"></div>
+                            <div class="progress-bar" style="width: ${pl.plProgress}%;" title="${test.progress}% 완료"></div>
                           </div>
                         </td>
                       </tr>
                       <c:set var="count" value="${count + 1}" />
                     </c:if>
                   </c:forEach>
-                  <c:if test="${empty tests}">
+                  <c:if test="${empty plList}">
                     <tr>
                       <td colspan="8">업무가 없습니다.</td>
                     </tr>

@@ -65,5 +65,11 @@ update member
          
    </insert>
    
+   <select id="almostName" resultType="member">
+    SELECT * 
+    FROM member 
+    WHERE member_name like concat('%',#{member_name},'%') 
+  </select>
+   
 
 </mapper>

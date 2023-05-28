@@ -77,6 +77,8 @@ SELECT a.*, m.member_department1, m.member_team1, m.member_name,m.member_rank
     AND a.article_id = #{article_id}
 </select>
 
+
+
 <update id="articleModify">
   UPDATE article
   SET article_title = #{article_title},
@@ -102,8 +104,11 @@ article_important=#{article_important}
 
 </insert>
 
-<select id="getArticleById" resultType="Article">
-        SELECT * FROM article WHERE article_id = #{article_id}
-    </select>
+
+
+
+
+
+    
 	
 </mapper> 

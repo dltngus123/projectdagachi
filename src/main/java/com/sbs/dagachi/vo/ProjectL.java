@@ -25,4 +25,5 @@ public class ProjectL {
 	String pl_Body;
 	
 	List<PM>extra_pmList;
+	double plProgress;
 }

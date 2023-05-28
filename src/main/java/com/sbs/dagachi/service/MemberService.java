@@ -83,7 +83,10 @@ public class MemberService {
 	            member_phone, member_email, member_address, member_dep, member_team, 
 	            member_dep1, member_team1, member_rank, member_birth, member_auth, member_pic);
 	   }
-	
+	public List<Member> almostName(String member_name){
+        return memberRepository.almostName(member_name);
+     }
+  
 	
 	
 }

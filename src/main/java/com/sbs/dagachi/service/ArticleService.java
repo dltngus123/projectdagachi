@@ -1,11 +1,8 @@
 package com.sbs.dagachi.service;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.sbs.dagachi.repository.ArticleRepository;
 import com.sbs.dagachi.vo.Article;
@@ -38,8 +35,6 @@ public class ArticleService {
 	}
 	
 	
-
-	
 	
 	public void articleModify(String article_title,String article_body,String article_attah,String article_id ) {
 		articleRepository.articleModify(article_title, article_body, article_attah, article_id);
@@ -60,9 +55,7 @@ public class ArticleService {
 	}
 
 	public Article getArticleById(int articleId) {
-	    // TODO: Implement the logic to retrieve the article by its ID from the database or any other source
-
-	    // For demonstration purposes, let's create a sample Article object with dummy data
+	    
 	    Article article = new Article();
 	    article.setArticle_id(articleId);
 	    article.setArticle_title("Sample Article");
@@ -74,6 +67,8 @@ public class ArticleService {
 
 	    return article;
 	}
+	
+	
 
 
 	 }
