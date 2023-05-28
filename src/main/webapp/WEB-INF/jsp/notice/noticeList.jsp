@@ -7,11 +7,31 @@
 
 <div class="content-wrapper" >
 <div class="col-md-12">
-<h1>공지사항</h1>
+<i id="star-icon" class="fas fa-star" style="color:#5865F2; font-size:3rem; display:inline-block; "></i>
+<script>
+const starIcon = document.getElementById('star-icon');
+
+// 로컬 저장소에서 클릭 상태를 가져옴
+const isClicked = localStorage.getItem('starClicked');
+if (isClicked === 'true') {
+  starIcon.classList.add('text-yellow');
+}
+
+starIcon.addEventListener('click', function() {
+  if (starIcon.classList.contains('text-yellow')) {
+    starIcon.classList.remove('text-yellow');
+    localStorage.setItem('starClicked', 'false');
+  } else {
+    starIcon.classList.add('text-yellow');
+    localStorage.setItem('starClicked', 'true');
+  }
+});
+</script>
+	<h1 style="margin:10px; display:inline-block;">공지 사항</h1>
 </div>
 <div class="col-md-12" style="display:flex;">
 <div class="col-md-6">
-	<button onclick="" style="background-color:#5865F2; color:white; border:none;">공지사항 등록</button>
+	<button onclick="articleinsert();" style="background-color:#5865F2; color:white; border:none; margin-top:15px; margin-bottom:15px; margin-left:15px;">공지사항 등록</button>
 </div>
 <div class="col-md-6">
  <form class="flex" style="text-align:right;margin-right:10px;">
@@ -49,7 +69,7 @@
 						 <button class="badge bg-danger"type="button" style=" border:none;">중요</button>
 					</c:if>
 				</td>
-			<td><a href="/article/detail?article_id=${article.article_id }" style="color: ${article.article_important == 1 ? 'red' : 'black'}">${article.article_title}</a></td>   
+			<td><a href="/notice/detail?article_id=${article.article_id }" style="color: ${article.article_important == 1 ? 'red' : 'black'}">${article.article_title}</a></td>   
 				<td>
 					  <c:if test="${article.article_attach != null}">
 					    <i class="fa fa-file"></i>
@@ -105,6 +125,10 @@
 </div>
 
 
-
+<script>
+function articleinsert() {
+    window.location.href = "/notice/doinsert";
+}
+</script>
 
 <%@include file="/WEB-INF/jsp/include/foot.jspf" %>

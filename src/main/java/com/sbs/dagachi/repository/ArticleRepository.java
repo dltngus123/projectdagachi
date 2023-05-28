@@ -19,4 +19,14 @@ public interface ArticleRepository {
 	public void articleModify(@Param("article_title")String article_title,@Param("article_body")String article_body,@Param("article_attach")String article_attah,@Param("article_id")String article_id );
 	
 	public void articleDelete(@Param("article_id")String article_id);
+	
+	public void articleInsert(
+		    @Param("article_register") String article_register,
+		    @Param("article_title") String article_title,
+		    @Param("article_body") String article_body,
+		    @Param("article_attach") String article_attach,
+		    @Param("article_important") String article_important
+		);
+	
+	public Article getArticleById(int articleId);
 }

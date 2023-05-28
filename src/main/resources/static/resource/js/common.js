@@ -67,4 +67,18 @@ function WirteImgThumb(contextPath){
 	      target.style.backgroundRepeat="no-repeat";
 	      target.style.backgroundSize="cover";
 	   }
+	   
+	   
+	 
+
+function MemberPictureThumb(contextPath){
+    for(var target of document.querySelectorAll('.manPicture')){   
+       var id = target.getAttribute('data-id');
+       
+      target.style.backgroundImage="url('"+contextPath+"/getPicture?id="+id+"')";            
+      target.style.backgroundPosition="center";
+      target.style.backgroundRepeat="no-repeat";
+      target.style.backgroundSize="cover";
+    }
+}
 	}

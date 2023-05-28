@@ -15,6 +15,13 @@
 	WHERE member_id = #{member_id}
 	</select>
 	
+		<select id="getMemberByName" resultType="Member">
+	SELECT *
+	FROM MEMBER
+	WHERE member_name = #{member_name}
+</select>
+
+	
 	<select id="getMembersNameByteam" resultType="Member">
 		SELECT *
 		FROM MEMBER

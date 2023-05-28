@@ -130,7 +130,6 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <c:set var="count" value="0" />
 
                     <c:forEach var="test" items="${tests}">
                       <c:if test="${count lt 5}">
@@ -371,7 +370,13 @@
         </tr>
       </thead>
       <tbody id="noticeTableBody">
-        <!-- 여기에 동적으로 데이터를 추가할 예정 -->
+       <c:forEach var="article" items="${borad1}" >
+       <tr>
+       	<td>${article.article_id }</td>
+       	<td><a href="/notice/detail?article_id=${article.article_id }">${article.article_title }</a></td>
+       	<td>${article.article_regdate }</td>
+       </tr>
+       </c:forEach>
       </tbody>
     </table>
   </div>
@@ -406,37 +411,7 @@
   </div>
 
 
-<script>
-  $(document).ready(function() {
-    // AJAX 요청을 보내서 데이터를 받아옴
-    $.ajax({
-      url: "/article/noticeList", // 컨트롤러의 URL 경로
-      type: "GET",
-      dataType: "json",
-      success: function(response) {
-        if (response.length > 0) {
-          // 받아온 데이터를 테이블에 동적으로 추가
-          var tableBody = $("#noticeTableBody");
-          $.each(response, function(index, article) {
-            var row = "<tr>" +
-              "<td>" + article.tno + "</td>" +
-              "<td><a href='#' onclick='' style='color:black;'>" + article.title + "</a></td>" +
-              "<td>" + article.date + "</td>" +
-              "</tr>";
-            tableBody.append(row);
-          });
-        } else {
-          // 데이터가 없을 경우 처리
-          var noDataMessage = "<tr><td colspan='3'>공지사항이 없습니다.</td></tr>";
-          $("#noticeTableBody").append(noDataMessage);
-        }
-      },
-      error: function() {
-        console.log("Error occurred while fetching data.");
-      }
-    });
-  });
-</script>
+
 
 
 <script>

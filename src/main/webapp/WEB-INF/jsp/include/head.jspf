@@ -210,9 +210,13 @@
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex flex-wrap" style="background-color:white; justify-content:center;">
-        <div class="image">
-          <img src="/resource/bootstrap/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
+<div id="userimg" class="col-sm-3">
+  <img src="${pageContext.request.contextPath}/common/getPicture?id=${loginUser.member_id}" alt="User Image"
+    style="width: 100%; height: 100%; object-fit: cover; ">
+</div>
+
+
+
         <div class="info mt-2 " style="background-color:#5865F2; margin-left:15px; ">
           <div class="d-block" style="color:white;">${loginUser.member_name }</div>
           <div class="d-block" style="color:white;">${loginUser.member_department1 }</div>
@@ -365,7 +369,7 @@
            aria-labelledby="headingFour" data-parent="#accordion">
   <div class="card-body">
     <div>
-      <a href="/article/noticeList">공지사항</a>
+      <a href="/notice/noticeList">공지사항</a>
     </div>
     <div>
       <a href="">공유 게시판</a>

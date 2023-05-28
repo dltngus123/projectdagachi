@@ -22,6 +22,7 @@ public class Attendence {
 	
 	private String member_department;
 	private String member_team;
-	
+
+	private String member_id;
 
 }

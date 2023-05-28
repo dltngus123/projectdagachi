@@ -89,5 +89,21 @@ SELECT a.*, m.member_department1, m.member_team1, m.member_name,m.member_rank
 <delete id="articleDelete">
 DELETE FROM article WHERE article_id =#{article_id}
 </delete>
+
+<insert id="articleInsert">
+insert into article
+set board_id=1,
+article_regdate=now(),
+article_register=#{article_register},
+article_title=#{article_title},
+article_body=#{article_body},
+article_attach=#{article_attach},
+article_important=#{article_important}
+
+</insert>
+
+<select id="getArticleById" resultType="Article">
+        SELECT * FROM article WHERE article_id = #{article_id}
+    </select>
 	
 </mapper> 

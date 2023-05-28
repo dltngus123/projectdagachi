@@ -1,6 +1,12 @@
 package com.sbs.dagachi.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -139,6 +145,26 @@ public class UsrCommonController {
 	        System.out.println("########"+loginUser.getMember_id()+memberStatus);
 	    
 		return "/usr/home/main";
+	}
+	
+	@Value(value = "${picturePath}")
+	private String picturePath;
+	
+	@GetMapping("/getPicture")
+	@ResponseBody
+	public byte[] getPicture(String id) throws Exception {
+	   
+	   Member member = memberService.getMemberById(id);
+	   if(member==null) return null;
+	   
+	   String picture = member.getMember_pic();
+	   String imgPath = this.picturePath;
+	   
+	   InputStream in = new FileInputStream(new File(imgPath, picture));
+	   
+	   
+	   return IOUtils.toByteArray(in);
+	
 	}
 
 }

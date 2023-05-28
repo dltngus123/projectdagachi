@@ -42,23 +42,23 @@
                     </tr>
                 </table>
 
-                <c:if test="${loginUser.member_id eq article.article_register}">
-                    <span style="float: right;">
-                        <input type="hidden" id="article_id" name="article_id" value="${article.article_id}">
-                        <input type="hidden" id="article_attach" name="article_attach" value="${article.article_attach}">
-                        <input type="hidden" id="article_body_original" name="article_body_original" value="${article.article_body}">
+                 <c:if test="${loginUser.member_id eq article.article_register}">
+        <span style="float: right;">
+            <input type="hidden" id="article_id" name="article_id" value="${article.article_id}">
+            <input type="hidden" id="article_attach" name="article_attach" value="${article.article_attach}">
+            <input type="hidden" id="article_body_original" name="article_body_original" value="${article.article_body}">
+            <input type="hidden" id="article_title_original" name="article_title_original" value="${article.article_title}">
+            <button onclick="modify();" class="btn btn-sidebar" style="background-color: #5865F2; width: 100px;">수정</button>
+            <button onclick="history_back();" class="btn btn-sidebar" style="background-color: #DC3545; width: 100px;">취소</button>
 
-                        <button onclick="modify();" class="btn btn-sidebar" style="background-color: #5865F2; width: 100px;">수정</button>
-                        <button onclick="history_back();" class="btn btn-sidebar" style="background-color: #DC3545; width: 100px;">취소</button>
+            <script>
+                function history_back() {
+                    history.back();
+                }
+            </script>
 
-                        <script>
-                            function history_back() {
-                                history.back();
-                            }
-                        </script>
-
-                    </span>
-                </c:if>
+        </span>
+    </c:if>
             </c:forEach>
         </div>
 
@@ -98,7 +98,7 @@
         
         $.ajax({
             type: "POST",
-            url: "/article/modify",
+            url: "/notice/modify",
             data: {
                 article_title: articleTitle,
                 article_body: articleBody,
@@ -107,7 +107,7 @@
             },
             success: function (response) {
                
-                window.location.href = "/article/noticeList";
+                window.location.href = "/notice/noticeList";
             }
         });
     }

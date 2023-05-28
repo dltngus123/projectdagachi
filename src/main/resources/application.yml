@@ -19,3 +19,5 @@ custom:
     level: debug
     
 picturePath:  c:/member/picture/upload
+
+filePath:  c:/upload/file

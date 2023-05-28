@@ -47,7 +47,12 @@ starIcon.addEventListener('click', function() {
 		<div class="info-box mb-6 "  style="background-color: #333c9e;">
 		<div class="member" style="display:flex; justify-content:center; color:white;">
 	
-		<span class="info-box-icon"><div class="member_pic" style=" margin:10px; background-color:white; height:100px; width:100px;border-radius:50%; ">사진</div></span>
+		
+		<div id="userimg" class="col-sm-6" style="width: 100px; height: 100px; border-radius: 50%;">
+  <img src="${pageContext.request.contextPath}/attendence/getPicture?id=${loginUser.member_name}" alt="User Image"
+    style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+</div>
+
 		<div class="info-box-content">
 		<span class="info-box-text"></span>
 			<div>

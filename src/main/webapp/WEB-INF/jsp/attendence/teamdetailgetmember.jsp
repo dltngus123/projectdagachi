@@ -9,7 +9,16 @@
 	<div class="card card-success" style="margin-top:15px;">
 <div class="card-header" style="background-color:#333c9e;">
 <div style="margin-left:10px;">
-<span style="width:100px;height:100px; background-color:red;">사진</span>
+<div style="text-align: right;">
+  <div id="userimg" class="col-sm-4" style="width: 100px; height: 100px; border-radius: 50%;">
+    <img src="${pageContext.request.contextPath}/attendence/getPicture?id=${param.member_name}" alt="User Image"
+      style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; float: right;">
+     
+  </div>
+</div>
+
+
+
 <c:forEach items="${member }" var="member">
     <c:set var="departmentName" value=""/>
     <c:choose>

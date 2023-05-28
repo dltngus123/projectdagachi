@@ -35,6 +35,12 @@ public class MemberService {
 		 Member member= memberRepository.getMemberById(member_id);
 		return member;
 	}
+	
+	public Member getMemberByName(String member_name) {
+		Member member = memberRepository.getMemberByName(member_name);
+		return member;
+	}
+	
 	public int login(String member_id,String member_pwd) {
 		int result = 0;
 		

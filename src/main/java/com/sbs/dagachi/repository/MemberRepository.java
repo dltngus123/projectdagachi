@@ -15,6 +15,8 @@ public interface MemberRepository {
 	
 	Member getMemberById(String member_id);
 	
+	Member getMemberByName(String member_name);
+	
 	List<Member>getMembersNameByteam(String member_team1);
 	
 	public List<Member> getMembername(@Param("member_name")String member_name);

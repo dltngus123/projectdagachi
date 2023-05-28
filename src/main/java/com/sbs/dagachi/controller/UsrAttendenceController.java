@@ -1,5 +1,8 @@
 package com.sbs.dagachi.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -7,10 +10,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sbs.dagachi.service.AttendenceService;
 import com.sbs.dagachi.service.MemberService;
@@ -307,7 +314,8 @@ public class UsrAttendenceController {
 
 	@RequestMapping("/attendence/teamdetailgetmember")
 	public String showteamdetailmember(Model model, String member_name, String attendence_regDate) {
-
+		
+		
 		List<Member> member = attendenceService.getMembername(member_name);
 		int TotalStatus1 = attendenceService.getMemberNameTotalStatus(member_name);
 		int TotalStatus7Count = attendenceService.getMemberNameTotalStatus7Count(member_name);
@@ -435,5 +443,26 @@ public class UsrAttendenceController {
 		return "/attendence/vacationdetail";
 
 	}
+	
+	@Value(value = "${picturePath}")
+	private String picturePath;
+	
+	@GetMapping("/attendence/getPicture")
+	@ResponseBody
+	public byte[] getPicture(@RequestParam("id")String member_name) throws Exception {
+	   
+	   Member member = memberService.getMemberByName(member_name);
+	   if(member==null) return null;
+	  
+	   String picture = member.getMember_pic();
+	   String imgPath = this.picturePath;
+	   
+	   InputStream in = new FileInputStream(new File(imgPath, picture));
+	   
+	   System.out.println("###############"+member_name);
+	   return IOUtils.toByteArray(in);
+	
+	}
+	
 
 }
