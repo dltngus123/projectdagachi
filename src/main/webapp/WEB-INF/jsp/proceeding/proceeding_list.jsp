@@ -4,11 +4,16 @@
  <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="../include/head.jspf"%>
-<div class="content-wrapper mt-4">
-   
-   <h1>
-   <i class="fas fa-star text-yellow"></i>
-   	회의록
+<div class="content-wrapper mt-4" style="background-color:white;">
+
+
+<h1>
+   <a href='javascript:registBookMark("/dagachi/proceeding/list", "회의록 전체 조회")'>
+   <i class="fas fa-star bookmarkCheck"></i>
+   </a>
+      <span style="color: black;">
+      회의록
+      </span>
    </h1>
 	<div class="col-12">
 	  <div class="card">
@@ -157,8 +162,10 @@
 
 
 <%@include file="../include/foot.jspf"%>
-
 <script>
-	
-	
+   window.onload=function(){
+      bookMarkList();
+      checkedBookMark("/dagachi/proceeding/list");
+   }
+   
 </script>

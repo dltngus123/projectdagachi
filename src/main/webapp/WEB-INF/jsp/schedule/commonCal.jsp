@@ -283,16 +283,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </script>
 
+<script>
+   window.onload=function(){
+      bookMarkList();
+      checkedBookMark("/schedule/commonCal");
+   }
+   
+</script>
 
-
-<div class="content-wrapper">
+<div class="content-wrapper" style="background-color:white;">
 <div>
-	<h1>공용 일정</h1>
+	   		    	<h1>
+   <a href='javascript:registBookMark("/schedule/commonCal", "사내 일정")'>
+   <i class="fas fa-star bookmarkCheck"></i>
+   </a>
+      <span style="color: black;">
+      사내 일정
+      </span>
+   </h1>
 </div>
 
 
   <div id="calendar" ></div>
-
+ 
 
 <div class="modal fade" id="calendarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">

@@ -158,24 +158,24 @@
 		  	<thead>
 		  	 <tr>
 		  	  <th>결재자</th>
-		  	  <th>승인여부</th>
-		  	  <th>의견</th>
+		  	  <th style="width:90px;">승인여부</th>
+		  	  <th style="width:450px;">의견</th>
 		  	  <th>일시</th>
 		  	 </tr>
 		  	</thead>
 		  	<tbody>
 		  		<tr>
-		  		<td>${member1.member_name } ${member1.member_rank }</td>
+		  		<td style="width:100px;">${member1.member_name } ${member1.member_rank }</td>
 		  		<c:if test="${approvers[0].a_status eq null }">
 		  		<td> <span id="status3" class="badge bg-warning">대기</span></td>
 		  		</c:if>
 		  		<c:if test="${approvers[0].a_status eq '0' }">
-		  		<td> <span id="status3" class="badge bg-primary">승인</span></td>
+		  		<td style="width:100px;"> <span id="status3" class="badge bg-primary">승인</span></td>
 		  		</c:if>
 		  		<c:if test="${approvers[0].a_status eq '1' }">
 		  		<td> <span id="status3" class="badge bg-danger">반려</span></td>
 		  		</c:if>
-		  		<td>${approvers[0].a_comment}</td>
+		  		<td style ="font-size:15px;">${approvers[0].a_comment}</td>
 		  		<td><fmt:formatDate value="${approvers[0].a_approvaldate }" pattern="yyyy.MM.dd HH.mm" /></td>
 		  		</tr>
 		  		<tr>
@@ -214,7 +214,8 @@
 	
 		
 		<div class="comment-box" style="margin-top: 20px; margin-left: 75px;">
-			<textarea name="commentdata" style="width: 650px; height: 150px;"></textarea>
+		<textarea name="commentdata" placeholder="의견을 작성해주세요. (50글자 이하)" style="width: 650px; height: 100px;" oninput="checkInputLength()"></textarea>
+
 		</div>
 		<div class="btns"
 			style="display: flex; justify-content: flex-end; padding-right: 30px;">
@@ -248,6 +249,12 @@
 
 
 <script>
+function checkInputLength() {
+    var comment = document.getElementsByName("commentdata")[0].value;
+    if (comment.length > 50) {
+      alert("50글자 이하만 작성 가능합니다.");
+    }
+  }
 	window.onload = function() {
 		var status1 = document.getElementById("status1").innerText;
 		var status2 = document.getElementById("status2").innerText;

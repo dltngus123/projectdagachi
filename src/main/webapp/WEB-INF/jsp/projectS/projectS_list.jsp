@@ -7,7 +7,14 @@
 <div class="container-fluid">
 <div class="row">
 <div class="col-sm-6">
-<h1>업무 관리</h1>
+<h1>
+   <a href='javascript:registBookMark("/dagachi/projectS/list", "개인 업무관리")'>
+   <i class="fas fa-star bookmarkCheck"></i>
+   </a>
+      <span style="color: black;">
+     개인 업무 관리
+      </span>
+   </h1>
 </div>
 <div class="col-sm-6  d-none d-sm-block">
 <ol class="breadcrumb float-sm-right">
@@ -226,5 +233,11 @@ function remove(ps_Id){
 			$('.resultPs').html(data);
 		}
 	})
+}
+
+
+window.onload=function(){
+	bookMarkList();
+    checkedBookMark('/dagachi/projectS/list');
 }
 </script>

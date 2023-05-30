@@ -215,7 +215,7 @@ FROM (
         )
     </if>
     GROUP BY a.attendence_regdate, m.member_department
-    ORDER BY a.attendence_regdate
+    ORDER BY a.attendence_regdate desc
 ) AS LIST;
 
 
@@ -266,7 +266,7 @@ WHERE a.attendence_status = 1
         )
     </if>
 GROUP BY a.attendence_regdate, m.member_department
-ORDER BY a.attendence_regdate
+ORDER BY a.attendence_regdate desc
  <if test="limitTake != -1">
         LIMIT #{limitStart}, #{limitTake}
     </if>
@@ -318,7 +318,7 @@ WHERE a.attendence_status = 1
         )
     </if>
 GROUP BY a.attendence_regdate, m.member_department, m.member_team
-ORDER BY a.attendence_regdate, m.member_department, m.member_team
+ORDER BY a.attendence_regdate desc, m.member_department, m.member_team
 <if test="limitTake != -1">
         LIMIT #{limitStart}, #{limitTake}
     </if>
@@ -394,7 +394,7 @@ FROM (
         )
     </if>
     GROUP BY a.attendence_regdate, m.member_department, m.member_team
-    ORDER BY a.attendence_regdate, m.member_department, m.member_team
+    ORDER BY a.attendence_regdate desc, m.member_department, m.member_team
 ) AS LIST;
 
 </select>

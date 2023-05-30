@@ -13,8 +13,8 @@
 
 
 
-<div class="col-md-3">
-<div class="card card-primary" style="width:980px; ">
+<div class="col-md-4">
+<div class="card card-primary" style="width:800px; ">
 <div class="card-header" style=" background-color:#333c9e;">
 <h5 class="card-title">
 <div style="color:white; margin-left:10px; margin-top:10px;">
@@ -83,16 +83,16 @@ ${Team.name}
 			 <c:forEach var="Team" items="${Teams}">
   <c:choose>
     <c:when test="${Team.team == 1 || Team.team == 4 || Team.team == 7 || Team.team == 10}">
-      <th>${Team.name} ${Team.team == 1 ? '1팀' : Team.team == 4 ? '1팀' : Team.team == 7 ? '1팀' : Team.team == 10 ? '1팀' : '2팀'} (출근 인원/총 인원)</th>
+      <th style="">${Team.name} ${Team.team == 1 ? '1팀' : Team.team == 4 ? '1팀' : Team.team == 7 ? '1팀' : Team.team == 10 ? '1팀' : '2팀'}(출근 인원/총 인원)</th>
     </c:when>
     <c:when test="${Team.team == 2 || Team.team == 5 || Team.team == 8 || Team.team == 11}">
-      <th>${Team.name} ${Team.team == 2 ? '2팀' : Team.team == 5 ? '2팀' : Team.team == 8 ? '2팀' : Team.team == 11 ? '2팀' : '3팀'} (출근 인원/총 인원)</th>
+      <th>${Team.name} ${Team.team == 2 ? '2팀' : Team.team == 5 ? '2팀' : Team.team == 8 ? '2팀' : Team.team == 11 ? '2팀' : '3팀'}(출근 인원/총 인원)</th>
     </c:when>
     <c:when test="${Team.team == 3 || Team.team == 6 || Team.team == 9 || Team.team == 12}">
-      <th>${Team.name} ${Team.team == 3 ? '3팀' : Team.team == 6 ? '3팀' : Team.team == 9 ? '3팀' : Team.team == 12 ? '3팀' : '1팀'} (출근 인원/총 인원)</th>
+      <th>${Team.name} ${Team.team == 3 ? '3팀' : Team.team == 6 ? '3팀' : Team.team == 9 ? '3팀' : Team.team == 12 ? '3팀' : '1팀'}(출근 인원/총 인원)</th>
     </c:when>
     <c:otherwise>
-      <th>${Team.name} (출근 인원/총 인원)</th>
+      <th>${Team.name}(출근 인원/총 인원)</th>
     </c:otherwise>
   </c:choose>
 </c:forEach>
@@ -105,14 +105,14 @@ ${Team.name}
  
     <c:forEach var="department" items="${todayTeams}">
       <tr class="hover">
-        <td>${department.attendence_regdate.toLocalDate().toString().substring(0, 10)}</td>
+        <td style="width:100px;">${department.attendence_regdate.toLocalDate().toString().substring(0, 10)}</td>
         <c:forEach var="Team" items="${Teams}">
        
           <c:set var="teamName" value="${Team.name}${Team.team}" />
           <td>
             <c:if test="${department.name == Team.name && department.team == Team.team}">
               <c:set var="teamCount" value="${department.team_count}/${Team.team_count}" />
-<a href="#" onclick="var myWindow = window.open('/attendence/teamdetail?member_department=${param.member_department }&member_team=${Team.team}&attendence_regDate=${department.attendence_regdate.toLocalDate().toString().substring(0, 10)}', 'departmentdetail2', 'width=800,height=400,modal=yes,alwaysRaised=yes'); modal.open('/attendence/teamdetail?member_team=${fn:substring(Team.team,0,1)}&attendence_regDate=${department.attendence_regdate.toLocalDate().toString().substring(0, 10)}', 'departmentdetail', 'modal=yes,alwaysRaised=yes');">
+<a href="#" onclick="var myWindow = window.open('/attendence/teamdetail?member_department=${param.member_department }&member_team=${Team.team}&attendence_regDate=${department.attendence_regdate.toLocalDate().toString().substring(0, 10)}', 'departmentdetail2', 'width=1000,height=600,modal=yes,alwaysRaised=yes'); modal.open('/attendence/teamdetail?member_team=${fn:substring(Team.team,0,1)}&attendence_regDate=${department.attendence_regdate.toLocalDate().toString().substring(0, 10)}', 'departmentdetail', 'modal=yes,alwaysRaised=yes');">
   ${teamCount}
 </a>
 

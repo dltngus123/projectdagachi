@@ -25,8 +25,11 @@ public interface ArticleRepository {
 		    @Param("article_title") String article_title,
 		    @Param("article_body") String article_body,
 		    @Param("article_attach") String article_attach,
-		    @Param("article_important") String article_important
+		    @Param("article_important") String article_important,
+		    @Param("fileSize") String fileSize,
+		    @Param("fileMimeType") String fileMimeType
 		);
+
 
 	public Article getArticleById(int articleId);
 	

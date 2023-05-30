@@ -32,14 +32,16 @@
         <div class="contentbox">
             <c:forEach var="article" items="${board}">
                 <textarea class="content summernote" name="content" id="content_${article.article_id}" readonly>${article.article_body}</textarea>
-               <table class="table w-full">
-				    <tr>
-				        <th style="text-align: start;">첨부파일</th>
-				        <td style="text-align: start;">
-				            <a href="<%=request.getContextPath() %>/notice/download?article_id=${article.article_id}" download>${article.article_attach}</a>
-				        </td>
-				    </tr>
-				</table>
+              <table class="table w-full">
+			    <tr>
+			        <th style="text-align: start;">첨부파일</th>
+			        <td style="text-align: start;">
+			          <a href="<%=request.getContextPath() %>/notice/download?article_id=${article.article_id}" download="${article.article_attach}">${article.article_attach}</a>
+			
+			        </td>
+			    </tr>
+			</table>
+
                 <c:if test="${loginUser.member_id eq  article.article_register }">
                     <input type="hidden" name="article_id" value="${article.article_id }">
                     <span style="float: right;">

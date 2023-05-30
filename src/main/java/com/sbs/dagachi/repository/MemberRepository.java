@@ -31,4 +31,7 @@ public interface MemberRepository {
 	         String member_address, int member_dep, int member_team, String member_dep1, String member_team1, String member_rank,
 	          Date member_birth, int member_auth, String member_pic);
 	public List<Member> almostName(@Param("member_name")String member_name);
+	Member findId(String name,String email);
+	
+	Member findPwd(String id,String name);	
 }

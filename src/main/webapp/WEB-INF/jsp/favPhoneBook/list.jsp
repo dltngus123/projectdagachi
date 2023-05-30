@@ -3,11 +3,21 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@include file="../include/head.jspf"%>
-   <div class="content-wrapper">
+<script>
+   window.onload=function(){
+      bookMarkList();
+      checkedBookMark("/dagachi/favPhoneBook/favList");
+   }
    
-   <h1>
-   <i class="fas fa-star text-yellow"></i>
-   	중요연락처
+</script>
+   <div class="content-wrapper">
+  <h1>
+   <a href='javascript:registBookMark("/dagachi/favPhoneBook/favList", "중요 연락처")'>
+   <i class="fas fa-star bookmarkCheck"></i>
+   </a>
+      <span style="color: black;">
+      중요 연락처
+      </span>
    </h1>
 	<div class="col-12">
 	  <div class="card">
@@ -49,7 +59,7 @@
 	        <thead>
 	          <tr>
 	          	<th><input type="checkbox" name="all" class="check-all"/></th>
-	          	<th><i class="fa-regular fa-star"></i></th>
+	          	<th><i class="fas fa-star"></i></th>
 	            <th>이름</th>
 	           	<th>전화번호</th>
 	           	<th>이메일</th>

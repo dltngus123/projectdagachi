@@ -2,10 +2,22 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="/WEB-INF/jsp/include/head.jspf"%>
+<script>
+   window.onload=function(){
+      bookMarkList();
+      checkedBookMark("/dagachi/phoneBook/companyPhoneBookList");
+   }
+   
+</script>
    <div class="content-wrapper">
    
    <h1>
+   <a href='javascript:registBookMark("/dagachi/phoneBook/companyPhoneBookList", "사내 주소록")'>
+   <i class="fas fa-star bookmarkCheck"></i>
+   </a>
+      <span style="color: black;">
       사내 주소록
+      </span>
    </h1>
    <div class="col-12">
      <div class="card">

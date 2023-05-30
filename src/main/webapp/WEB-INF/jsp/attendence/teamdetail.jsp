@@ -9,7 +9,7 @@
 <div class="col-md-12" style="margin-top:10px; margin-right:10px; display:flex; ">
 <div class="col-md-7" style="margin-right:20px; ">
 
-	<div class="card card-success" style="margin-top:15px; width:580px;">
+	<div class="card card-success" style="margin-top:15px; width:580px; height:600px;">
 <div class="card-header" style="background-color:#333c9e;">
  
 

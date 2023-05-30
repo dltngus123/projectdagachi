@@ -277,11 +277,24 @@
 
 </script>
 
+<script>
+   window.onload=function(){
+      bookMarkList();
+      checkedBookMark("/schedule/personalCal");
+   }
+   
+</script>
 
-
-<div class="content-wrapper">
+<div class="content-wrapper" style="background-color:white;">
 <div>
-	<h1>개인 일정</h1>
+	    		<h1>
+   <a href='javascript:registBookMark("/schedule/personalCal", "개인 일정")'>
+   <i class="fas fa-star bookmarkCheck"></i>
+   </a>
+      <span style="color: black;">
+      개인 일정
+      </span>
+   </h1>
 </div>
   <div id="calendar"></div>
 

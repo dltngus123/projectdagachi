@@ -44,15 +44,9 @@ public class ArticleService {
 		articleRepository.articleDelete(article_id);
 	}
 	
-	public void articleInsert(
-	        String article_register,
-	        String article_title,
-	        String article_body,
-	        String filename,
-	        String article_important
-	) {
-	    articleRepository.articleInsert(article_register, article_title, article_body, filename, article_important);
-	}
+	 public void articleInsert(String article_register, String article_title, String article_body, String filename, String article_important, String fileSize, String fileMimeType) {
+	        articleRepository.articleInsert(article_register, article_title, article_body, filename, article_important, fileSize, fileMimeType);
+	    }
 
 	public Article getArticleById(int articleId) {
 	    
@@ -61,7 +55,7 @@ public class ArticleService {
 	    article.setArticle_title("Sample Article");
 	    article.setArticle_body("This is a sample article.");
 	    
-	    // Set the file path where the actual file is stored
+	    
 	    String filePath = "c:/article/file/upload/" + articleId + ".pdf";
 	    article.setArticle_attach(filePath);
 

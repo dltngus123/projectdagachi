@@ -10,48 +10,40 @@
 
 }
 </style>
+<script>
+   window.onload=function(){
+      bookMarkList();
+      checkedBookMark("/reservation/list");
+   }
+   
+</script>
 
 
 
-
-<div class="content-wrapper" >	
+<div class="content-wrapper" style="background-color:white;">	
 
 <div class="col-md-12">
-<i id="star-icon" class="fas fa-star" style="color:#5865F2; font-size:3rem; display:inline-block; "></i>
-
-<script>
-const starIcon = document.getElementById('star-icon');
-
-//로컬 저장소에서 클릭 상태를 가져옴
-const isClicked = localStorage.getItem('starClicked');
-if (isClicked === 'true') {
-starIcon.classList.add('text-yellow');
-}
-
-starIcon.addEventListener('click', function() {
-if (starIcon.classList.contains('text-yellow')) {
- starIcon.classList.remove('text-yellow');
- localStorage.setItem('starClicked', 'false');
-} else {
- starIcon.classList.add('text-yellow');
- localStorage.setItem('starClicked', 'true');
-}
-});
-</script>
-	<h1 style="margin:10px; display:inline-block;">회의실 예약</h1>
+    		<h1>
+   <a href='javascript:registBookMark("/reservation/list", "회의실 예약 메인")'>
+   <i class="fas fa-star bookmarkCheck"></i>
+   </a>
+      <span style="color: black;">
+      회의실 예약
+      </span>
+   </h1>
 	</div>
 		<c:if test="${loginUser.member_auth eq 2 or loginUser.member_auth eq 3}">
-  <div id="btngroup" style="display:flex;">
+  <div id="btngroup" >
     <div class="insertbtn" style="margin: 10px;">
-      <button type="button" style="background-color:#717cfa;  border:none; border-radius:5px;" data-toggle="modal" data-target="#insertroom">신규 회의실 등록</button>
+      <button type="button" style="background-color:#717cfa; height:40px;  border-radius:5px;" data-toggle="modal" data-target="#insertroom">신규 회의실 등록</button>
     </div>
     <div class="modifybtn" style="margin: 10px;">
-      <button type="button" style="background-color:#ffd865;  border:none;border-radius:5px;" data-toggle="modal" data-target="#modifyroom">회의실 정보 수정</button>
+      <button type="button" style="background-color:#ffd865;height:40px; border-radius:5px;" data-toggle="modal" data-target="#modifyroom">회의실 정보 수정</button>
     </div>
   </div>
 </c:if>
 
-<div class="col-md-5" >
+<div class="col-md-12" style="item-align:end;">
  <div id="baritem" style="display:flex; justify-content:end; margin-top:20px;">
       <div id="bar"style="background-color: red; height: 25px; margin-right:5px;"></div>
       <div style="width:100px;">예약 불가</div>
@@ -67,109 +59,21 @@ if (starIcon.classList.contains('text-yellow')) {
     <div style="flex-grow: 1; display: flex; flex-direction: column; align-items: center; width:200px;">
       <div style="flex-grow: 1;"></div>
       <c:forEach var="room" items="${room}">
-        <button class="room-button bg-Info badge-lg" style="background-color:#17a2b8; border:none; margin-top:5px; margin-right:20px;border-radius:5px; "data-room-code="${room.room_code}" onclick="showEvents('${room.room_code}')">${room.room_name}</button>
+        <button class="room-button bg-Info badge-lg" style="background-color:#17a2b8; height:40px; margin-top:5px; margin-right:20px;border-radius:5px; "data-room-code="${room.room_code}" onclick="showEvents('${room.room_code}')">${room.room_name}</button>
       </c:forEach>
       <div style="flex-grow: 1;"></div>
     </div>
-    <div id="calendar" style="width: 1800px;"></div>
+    <div id="calendar" style="width: 1800px; "></div>
   
   </div>
 </div>
-     <form class="flex" style="text-align:right;margin-right:10px;">
+  
 
-        	<select name="searchKeywordTypeCode" data-value="${param.searchKeywordTypeCode }" id="" class="select select-bordered">
-	           <option disabled="disabled">검색타입</option>
-	           <option value="room_code">회의실번호</option>
-	           <option value="reservation_member">등록자</option>
-	           <option value="room_code,reservation_member">회의실번호,등록자</option>
-        	</select>
-        <input name="searchKeyword" type="text" class="ml-2 w-72 input input-bordered" placeholder="검색어" maxlength="20" value="${param.searchKeyword }" />
-      		<button type="submit" style="background-color:#5865F2; color:white; border:none;">검색</button>
-     </form>
-      <div style="margin:10px;">회의실 예약 : <span class="text-blue-700">${reservationCount }</span> 건</div>
-
-	<div class="content-list" style="margin:10px; margin-left:15px;">
-		<div class="mt-3">
-	      <table class="table table-fixed w-full">
-	        <colgroup>   
-	          <col width="50"/>
-	          <col width="50"/>
-	          <col width="50"/>
-	          <col width="50"/>
-	          <col width="50"/>
-	          <col width="50"/>
-	          <col width="50"/>
-	          <col />
-	        </colgroup>
-	        <thead>
-	          <tr>
-	            <th>번호</th>
-	            <th>회의실번호</th>
-	            <th>사유</th>
-	            <th>시작시간</th>
-	            <th>끝나는시간</th>
-	            <th>등록자</th>
-	            <th>등록날짜</th>
-	          </tr>
-	        </thead>
-	        <tbody>
-	          <c:forEach var="reservation" items="${reservations}">
-				    <tr class="hover">
-				        <th>${reservation.reservation_code}</th>
-				        <td>${reservation.room_code}</td>
-				        <td>${reservation.reservation_title }</td>
-				        <td><fmt:formatDate value="${reservation.reservation_start}" pattern="yyyy-MM-dd" /></td>
-				        <td><fmt:formatDate value="${reservation.reservation_end}" pattern="yyyy-MM-dd" /></td>
-				        <td>
-				            <a class="btn-text-link block w-full truncate" href="OpenWindow('../reservation/detail?id=${reservation.reservation_code}','detail Page','800','800');">${reservation.reservation_member}</a>
-				        </td>
-				        <td><fmt:formatDate value="${reservation.reservation_regtime}" pattern="yyyy-MM-dd" /></td>
-				    </tr>
-				</c:forEach>
-	        </tbody>
-	      </table>
-    	</div>
-	</div>
+	
 
 </div>
 
-   <div class="row">
-  <div class="col">
-    <nav aria-label="Contacts Page Navigation">
-      <c:set var="pageMenuArmLen" value="4" />
-      <c:set var="startPage" value="${page - pageMenuArmLen < 1 ? 1 : page - pageMenuArmLen}" />
-      <c:set var="endPage" value="${page + pageMenuArmLen > pagesCount ? pagesCount : page + pageMenuArmLen}" />
-      <c:set var="pageBaseUri" value="searchKeyword=${param.searchKeyword}&searchKeywordTypeCode=${param.searchKeywordTypeCode}" />
-      <ul class="pagination justify-content-center m-0">
-        <c:if test="${startPage > 1}">
-          <li class="page-item">
-            <a class="page-link btn btn-sm" href="?${pageBaseUri}&page=1">1</a>
-          </li>
-          <c:if test="${startPage > 2}">
-            <li class="page-item">
-              <a class="page-link btn btn-sm">...</a>
-            </li>
-          </c:if>
-        </c:if>
-        <c:forEach begin="${startPage}" end="${endPage}" var="i">
-          <li class="page-item ${param.page == i ? 'active' : ''}">
-            <a class="page-link btn btn-sm" href="?${pageBaseUri}&page=${i}">${i}</a>
-          </li>
-        </c:forEach>
-        <c:if test="${endPage < pagesCount}">
-          <li class="page-item">
-            <a class="page-link btn btn-sm">...</a>
-          </li>
-        </c:if>
-        <c:if test="${endPage < pagesCount-1}">
-          <li class="page-item">
-            <a class="page-link btn btn-sm" href="?${pageBaseUri}&page=${pagesCount}">${pagesCount}</a>
-          </li>
-        </c:if>
-      </ul>
-    </nav>
-  </div>
-</div>
+  
 
 <!-- modal 추가 -->
 
@@ -537,7 +441,7 @@ if (starIcon.classList.contains('text-yellow')) {
       },
       customButtons: {
         addEventButton: {
-          text: '일정 추가',
+          text: '예약 하기',
           click: function() {
             $("#calendarModal").modal("show");
           }

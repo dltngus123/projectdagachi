@@ -105,7 +105,7 @@
 
 <script>
 function openwindow(url) {
-  window.open(url, 'departmentdetail', 'width=1200,height=800');
+  window.open(url, 'departmentdetail', 'width=1250,height=800');
 }
 </script>
 <script>

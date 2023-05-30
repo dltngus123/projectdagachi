@@ -71,5 +71,16 @@ update member
     WHERE member_name like concat('%',#{member_name},'%') 
   </select>
    
+ <select id="findId" resultType="Member">
+   SELECT *
+   FROM MEMBER
+  where member_name=#{name} AND member_email=#{email}
+   </select>
+ 	<select id="findPwd" resultType="Member">
+ 	SELECT *
+ 	FROM MEMBER
+ 	where member_id=#{id} AND member_name=#{name}
 
+	 </select>
+ 
 </mapper>

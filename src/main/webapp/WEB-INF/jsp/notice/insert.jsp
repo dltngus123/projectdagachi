@@ -96,10 +96,10 @@
   }
 
   function generateDownloadName(originalName) {
-    var timestamp = new Date().getTime(); 
-    var extension = originalName.split('.').pop(); 
-    return timestamp + '.' + extension;
-  }
+	  var extension = originalName.split('.').pop();
+	  var fileName = originalName.substring(0, originalName.lastIndexOf('.'));
+	  return fileName + '.' + extension;
+	}
 
   var uploadedFiles = [];
   document.getElementById('fileUpload').addEventListener('change', function(event) {
@@ -110,7 +110,7 @@
       uploadedFiles.push(file);
 
       var fileInfo = document.createElement('div');
-      fileInfo.textContent = file.name;
+      fileInfo.textContent = generateDownloadName(file.name);
       fileInfo.style.backgroundColor = 'white';
       fileInfo.style.border = '1px solid black';
       fileInfo.style.padding = '5px';

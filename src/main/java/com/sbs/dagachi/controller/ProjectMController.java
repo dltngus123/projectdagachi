@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sbs.dagachi.service.MemberService;
+import com.sbs.dagachi.service.NotificationService;
 import com.sbs.dagachi.service.PMService;
 import com.sbs.dagachi.service.PSService;
 import com.sbs.dagachi.service.ProjectLService;
@@ -27,13 +28,15 @@ public class ProjectMController {
 	private TeamService teamService;
 	private PMService pMService;
 	private PSService pSService;
+	private NotificationService notificationService;
 
-	public ProjectMController(MemberService memberService,ProjectLService projectLService, TeamService teamService, PMService pMService,PSService pSService) {
+	public ProjectMController(MemberService memberService,ProjectLService projectLService, TeamService teamService, PMService pMService,PSService pSService,NotificationService notificationService) {
 		this.memberService=memberService;
 		this.projectLService=projectLService;
 		this.teamService=teamService;
 		this.pMService=pMService;
 		this.pSService=pSService;
+		this.notificationService=notificationService;
 	}
 	
 	
@@ -125,7 +128,7 @@ public class ProjectMController {
 			pSService.registPs(pm.getPm_name(), 
 					loginUser.getMember_id(), member_id, pm.getPm_startDate(), pm.getPm_endDate(),0,pm.getPm_Id());
 			//pSService.modifyPs(3,ps.getPs_Id());
-			
+			notificationService.registNotification("새 업무가 등록되었습니다.", member_id, "/dagachi/projectS/list", loginUser.getMember_id());
 			
 //			if(ps==null) {
 //				pSService.registPs(pm.getPm_name(), 

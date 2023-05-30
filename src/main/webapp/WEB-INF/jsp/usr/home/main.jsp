@@ -46,14 +46,13 @@
 
 
 <div class="content-wrapper">
-  <div class="row" style="padding-top: 60px;">
+  <div class="row" style="background-color:#FCFCFC" >
     <div class="col-7">
       <div class="row m-4" style="width:100%;">
         <nav class="">
           <div class="nav nav-tabs" id="product-tab" role="tablist">
-            <a class="nav-item nav-link active" id="approval-list-tab" data-toggle="tab" href="#approval-list" role="tab" aria-controls="approval-list" aria-selected="true">결재 목록</a>
-            <a class="nav-item nav-link" id="approval-success-list-tab" data-toggle="tab" href="#approval-success-list" role="tab" aria-controls="approval-success-list" aria-selected="false">결재 승인 목록</a>
-            <a class="nav-item nav-link" id="approval-false-list-tab" data-toggle="tab" href="#approval-false-list" role="tab" aria-controls="approval-false-list" aria-selected="false">결재 반려 목록</a>
+            <a class="nav-item nav-link active" id="approval-list-tab" data-toggle="tab" href="#approval-list" role="tab" aria-controls="approval-list" aria-selected="true">내가 상신한 문서</a>
+            <a class="nav-item nav-link" id="approval-success-list-tab" data-toggle="tab" href="#approval-success-list" role="tab" aria-controls="approval-success-list" aria-selected="false">내가 결재할 문서</a>
           </div>
         </nav>
         <div class="tab-content" style="width:100%;" id="nav-tabContent">
@@ -63,47 +62,40 @@
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
-                      <th style="width:5%;">문서 번호</th>
+                 <th style="width:5%;">양식 명</th>
                       <th style="width:40%;">문서 제목</th>
-                      <th style="width:10%;">결재 날자</th>
-                      <th style="width:5%;">첨부파일</th>
-                      <th style="width:10%;">최초 결재자</th>
-                      <th style="width:10%;">중간 결재자</th>
-                      <th style="width:10%;">최종 결재자</th>
+                      <th style="width:20%;">기안자</th>
+                      <th style="width:10%;">등록 일시</th>
                       <th style="width:10%;">결재 상태</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <c:set var="count" value="0" />
-
-                    <c:forEach var="test" items="${tests}">
-                      <c:if test="${count lt 5}">
-                        <tr>
-                          <td>${test.tno}</td>
-                          <td><a href="#" onclick="" style="color:black;">${test.title}</a></td>
-                          <td>${test.date}</td>
-                          <td style="text-align:center;">
-                            <c:if test="${test.type ne null}">
-                              <i class='fa fa-file'></i> <!-- Add your file icon element here -->
-                            </c:if>
-                          </td>
-                          <td>${test.name}</td>
-                          <td>${test.name}</td>
-                          <td>${test.name}</td>
+                  <c:forEach items="${approvalList }" var="approval">
+                        <tr onclick="OpenWindow('/approval/detail?approval_id=${approval.approval_id}','dd','800','800')">
                           <td>
-                            <c:choose>
-                              <c:when test="${test.status eq 1}">대기</c:when>
-                              <c:when test="${test.status eq 2}">승인</c:when>
-                              <c:when test="${test.status eq 3}">반려</c:when>
-                              <c:otherwise>Unknown</c:otherwise>
-                            </c:choose>
+                           <c:forEach var="form" items="${form }">
+                          <c:if test="${form.form_id eq approval.form_id }">
+                           ${form.form_name }
+                          </c:if>
+                         </c:forEach>
+                          </td>
+                          <td>${approval.approval_title } <c:if test="${approval.approval_level eq 1 }"><span class="badge bg-danger">긴급</span></c:if></td>
+                          <td> <c:forEach items="${memberList }" var="member">
+                          <c:if test="${member.member_id eq approval.approval_register }">
+                           ${member.member_name } ${member.member_rank }
+                          </c:if>
+                          </c:forEach></td>
+                          <td>
+                           <fmt:formatDate value="${approval.approval_registdate }" pattern="yyyy.MM.dd HH.mm" />
+                          </td>
+                          <td>
+                           <c:if test="${approval.approval_status eq 0}"><span class="badge bg-warning">대기</span></c:if>
+                          <c:if test="${approval.approval_status eq 1}"><span class="badge bg-success">완료</span></c:if>
+                          <c:if test="${approval.approval_status eq 2}"><span class="badge bg-danger">반려</span></c:if>
                           </td>
                         </tr>
-                        <c:set var="count" value="${count + 1}" />
-                      </c:if>
-                    </c:forEach>
-
-                    <c:if test="${empty tests}">
+					</c:forEach>
+                    <c:if test="${empty approvalList}">
                       <tr>
                         <td colspan="8">결재 내역이 없습니다.</td>
                       </tr>
@@ -119,44 +111,42 @@
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
-                      <th style="width:5%;">문서 번호</th>
+                      <th style="width:5%;">양식 명</th>
                       <th style="width:40%;">문서 제목</th>
-                      <th style="width:10%;">결재 날자</th>
-                      <th style="width:5%;">첨부파일</th>
-                      <th style="width:10%;">최초 결재자</th>
-                      <th style="width:10%;">중간 결재자</th>
-                      <th style="width:10%;">최종 결재자</th>
+                      <th style="width:20%;">기안자</th>
+                      <th style="width:10%;">등록 일시</th>
                       <th style="width:10%;">결재 상태</th>
                     </tr>
                   </thead>
                   <tbody>
-
-                    <c:forEach var="test" items="${tests}">
-                      <c:if test="${count lt 5}">
-                      	<c:if test="${test.status eq 2}">
-                        <tr>
-                          <td>${test.tno}</td>
-                          <td><a href="#" onclick="" style="color:black;">${test.title}</a></td>
-                          <td>${test.date}</td>
-                          <td style="text-align:center;">
-                            <c:if test="${test.type ne null}">
-                              <i class='fa fa-file'></i> <!-- Add your file icon element here -->
-                            </c:if>
-                          </td>
-                          <td>${test.name}</td>
-                          <td>${test.name}</td>
-                          <td>${test.name}</td>
+    <c:forEach items="${approverList }" var="approval">
+                        <tr onclick="OpenWindow('/approval/detail?approval_id=${approval.approval_id}','dd','800','800')">
                           <td>
-                            <c:if test="${test.status eq 2}">승인</c:if>
+                           <c:forEach var="form" items="${form }">
+                          <c:if test="${form.form_id eq approval.form_id }">
+                           ${form.form_name }
+                          </c:if>
+                         </c:forEach>
+                          </td>
+                          <td>${approval.approval_title } <c:if test="${approval.approval_level eq 1 }"><span class="badge bg-danger">긴급</span></c:if></td>
+                            <td> <c:forEach items="${memberList }" var="member">
+                          <c:if test="${member.member_id eq approval.approval_register }">
+                           ${member.member_name } ${member.member_rank }
+                          </c:if>
+                          </c:forEach></td>
+                          <td>
+                           <fmt:formatDate value="${approval.approval_registdate }" pattern="yyyy.MM.dd HH.mm" />
+                          </td>
+                          <td>
+                           <c:if test="${approval.approval_status eq 0}"><span class="badge bg-warning">대기</span></c:if>
+                          <c:if test="${approval.approval_status eq 1}"><span class="badge bg-success">완료</span></c:if>
+                          <c:if test="${approval.approval_status eq 2}"><span class="badge bg-danger">반려</span></c:if>
                           </td>
                         </tr>
-                        <c:set var="count" value="${count + 1}" />
-                        </c:if>
-                      </c:if>
-                    </c:forEach>
-                    <c:if test="${empty tests}">
+					</c:forEach>
+                    <c:if test="${empty approvalList}">
                       <tr>
-                        <td colspan="8">승인된 결재 내역이 없습니다.</td>
+                        <td colspan="8">결재 내역이 없습니다.</td>
                       </tr>
                     </c:if>
                   </tbody>
@@ -164,58 +154,7 @@
               </div>
             </div>
           </div>
-          <div class="tab-pane fade" id="approval-false-list" role="tabpanel" aria-labelledby="product-rating-tab">
-            <div class="card">
-              <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
-                  <thead>
-                    <tr>
-                      <th style="width:5%;">문서 번호</th>
-                      <th style="width:40%;">문서 제목</th>
-                      <th style="width:10%;">결재 날자</th>
-                      <th style="width:5%;">첨부파일</th>
-                      <th style="width:10%;">최초 결재자</th>
-                      <th style="width:10%;">중간 결재자</th>
-                      <th style="width:10%;">최종 결재자</th>
-                      <th style="width:10%;">결재 상태</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <c:set var="count" value="0" />
-
-                    <c:forEach var="test" items="${tests}">
-                      <c:if test="${count lt 5}">
-                      	<c:if test="${test.status eq 3}">
-                        <tr>
-                          <td>${test.tno}</td>
-                          <td><a href="#" onclick="" style="color:black;">${test.title}</a></td>
-                          <td>${test.date}</td>
-                          <td style="text-align:center;">
-                            <c:if test="${test.type ne null}">
-                              <i class='fa fa-file'></i> <!-- Add your file icon element here -->
-                            </c:if>
-                          </td>
-                          <td>${test.name}</td>
-                          <td>${test.name}</td>
-                          <td>${test.name}</td>
-                          <td>
-                            <c:if test="${test.status eq 3}">반려</c:if>
-                          </td>
-                        </tr>
-                        <c:set var="count" value="${count + 1}" />
-                        </c:if>
-                      </c:if>
-                    </c:forEach>
-                    <c:if test="${empty tests}">
-                      <tr>
-                        <td colspan="8">반려된 결재 내역이 없습니다.</td>
-                      </tr>
-                    </c:if>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+          
         </div>
       </div>
       <div class="row m-4" style="width:100%;">
@@ -349,7 +288,7 @@
           </div>
         </div>
         <div class="col-6 pr-0">
-<div class="card">
+<div class="card " >
   <div class="card-header">
     <h3 class="card-title">공지사항</h3>
   </div>
@@ -358,7 +297,7 @@
     <table class="table table-hover text-nowrap">
       <thead>
         <tr>
-          <th style="width:20px;">번호</th>
+          <th >번호</th>
           <th>제목</th>
           <th>작성날짜</th>
         </tr>
@@ -368,7 +307,7 @@
        <tr>
        	<td>${article.article_id }</td>
        	<td><a href="/notice/detail?article_id=${article.article_id }">${article.article_title }</a></td>
-       	<td>${article.article_regdate }</td>
+       	<td>${article.article_regdate.substring(0, 11)}</td>
        </tr>
        </c:forEach>
       </tbody>

@@ -30,7 +30,7 @@
 
 </style>
 
-  <div class="inner" style="width: 800px; height: 100px; color: white; font-size: 1.2rem; display: flex; margin-left:230px; margin-top:15px;">
+  <div class="inner" style="border:1px solid black; width: 550px;height: 100px; color: white; font-size: 1.2rem; display: flex; margin-left:230px; margin-top:15px;">
     <input type="hidden" name="vacation_member" />
 
     <div class="rounded_div" style="margin-right: 50px;">
@@ -49,7 +49,7 @@
 		
     </div>
     </div>
-<div class="inner" style="width: 800px; height: 100px; color: white; font-size: 1.2rem; display: flex; margin-top:10px; margin-left:230px;">
+<div class="inner" style=" border:1px solid black;width: 550px; height: 100px; color: white; font-size: 1.2rem; display: flex; margin-top:10px; margin-left:230px;">
     <div class="rounded_div"style="margin-right: 50px;">
     <span >총 월차 <div style="font-weight: bold;">${vacationMonth }</div></span>
     </div>
@@ -68,6 +68,7 @@
 	
  
 </div>
+
 
 	<div class="col-sm-11">
 	<div class="card card-success"  style="margin-top: 15px; margin-left:70px;">

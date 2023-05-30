@@ -185,7 +185,7 @@ var memArr=[]
 function inserting(fm,memId){
 	$('#attendenceList').append(fm);
 	memArr.push(memId);
-	alert(memArr);
+	
 	inputBox.val("");
 	$('input[name="attenders"]').val(memArr);
 	$("#recommend").css("display","none");

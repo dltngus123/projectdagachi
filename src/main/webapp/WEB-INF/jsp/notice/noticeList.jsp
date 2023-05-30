@@ -4,30 +4,23 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@include file="/WEB-INF/jsp/include/head.jspf" %>
-
-<div class="content-wrapper" >
-<div class="col-md-12">
-<i id="star-icon" class="fas fa-star" style="color:#5865F2; font-size:3rem; display:inline-block; "></i>
 <script>
-const starIcon = document.getElementById('star-icon');
-
-// 로컬 저장소에서 클릭 상태를 가져옴
-const isClicked = localStorage.getItem('starClicked');
-if (isClicked === 'true') {
-  starIcon.classList.add('text-yellow');
-}
-
-starIcon.addEventListener('click', function() {
-  if (starIcon.classList.contains('text-yellow')) {
-    starIcon.classList.remove('text-yellow');
-    localStorage.setItem('starClicked', 'false');
-  } else {
-    starIcon.classList.add('text-yellow');
-    localStorage.setItem('starClicked', 'true');
-  }
-});
+   window.onload=function(){
+      bookMarkList();
+      checkedBookMark("/notice/noticeList");
+   }
+   
 </script>
-	<h1 style="margin:10px; display:inline-block;">공지 사항</h1>
+<div class="content-wrapper" style="background-color:white;">
+<div class="col-md-12">
+<h1>
+   <a href='javascript:registBookMark("/notice/noticeList", "공지 조회")'>
+   <i class="fas fa-star bookmarkCheck"></i>
+   </a>
+      <span style="color: black;">
+      공지 사항
+      </span>
+   </h1>
 </div>
 <div class="col-md-12" style="display:flex;">
 <div class="col-md-6">

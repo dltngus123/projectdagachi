@@ -19,30 +19,24 @@
 
 
 </style>
-<input type="hidden" name="${attendence.attendence_regDate }"/>
-<div class="content-wrapper" >	
-<i id="star-icon" class="fas fa-star" style="color:#5865F2; font-size:3rem; display:inline-block; "></i>
+
 <script>
-const starIcon = document.getElementById('star-icon');
-
-// 로컬 저장소에서 클릭 상태를 가져옴
-const isClicked = localStorage.getItem('starClicked');
-if (isClicked === 'true') {
-  starIcon.classList.add('text-yellow');
-}
-
-starIcon.addEventListener('click', function() {
-  if (starIcon.classList.contains('text-yellow')) {
-    starIcon.classList.remove('text-yellow');
-    localStorage.setItem('starClicked', 'false');
-  } else {
-    starIcon.classList.add('text-yellow');
-    localStorage.setItem('starClicked', 'true');
-  }
-});
+   window.onload=function(){
+      bookMarkList();
+      checkedBookMark("/attendence/list");
+   }
+   
 </script>
-	<h1 style="margin:10px; display:inline-block;">근태 관리</h1>
-
+<input type="hidden" name="${attendence.attendence_regDate }"/>
+<div class="content-wrapper" style="background-color:white;">	
+<h1>
+   <a href='javascript:registBookMark("/attendence/list", "근태 조회")'>
+   <i class="fas fa-star bookmarkCheck"></i>
+   </a>
+      <span style="color: black;">
+      근태 관리
+      </span>
+   </h1>
 		<div class="col-lg-12" style="display:flex; justify-content:start;" >
 		<div class="info-box mb-6 "  style="background-color: #333c9e;">
 		<div class="member" style="display:flex; justify-content:center; color:white;">
@@ -76,15 +70,40 @@ starIcon.addEventListener('click', function() {
   <div class="inner" style="width: 800px; height: 100px; color: white; font-size: 1.2rem; display: flex;">
     <input type="hidden" name="vacation_member" />
 
-    <div class="rounded_div" style="margin-right: 50px;">
-    <div class="text-block"><a href="#" style="color: inherit;" onclick="openwindow('/attendence/vacationdetail');return false;">잔여 연차</a></div>
-      <span class="delYear"><a href="#" style="color: inherit;" onclick="openwindow('/attendence/vacationdetail');return false;"><div style="font-weight: bold;">${vacationYear - DelYear}</div></a></span>
-    </div>
+    <div class="rounded_div" style="margin-right: 50px;" onmouseout="this.style.backgroundColor= '#1d2472'"
+                                    onmouseover="this.style.backgroundColor= '#5865f2'">
+                                    <div class="text-block">
+                                          <a href="#" style="color: inherit; font-size: 1rem"
+                                                onclick="OpenWindow('/attendence/vacationdetail','연/월차 조회', 1000,500);">
+                                                잔여 연차
+                                                <i class="fas fa-search "></i>
+                                          </a>
+                                    </div>
+                                    <span class="delYear">
+                                          <a href="#" style="color: inherit;" onclick="OpenWindow('/attendence/vacationdetail','연/월차 조회',1000,500);">
+                                                <div style="font-weight: bold;">${vacationYear - DelYear}</div>
+                                          </a>
+                                    </span>
+                              </div>
 
-    <div class="rounded_div">
-    <div class="text-block"><a href="#" style="color: inherit;" onclick="openwindow('/attendence/vacationdetail');return false;">잔여 월차</a></div>
-      <span><a href="#" style="color: inherit;" onclick="openwindow('/attendence/vacationdetail');return false;"><div style="font-weight: bold;">${vacationMonth - DelMonth}</div></a></span>
-    </div>
+
+     <div class="rounded_div" onmouseout="this.style.backgroundColor= '#1d2472'"
+                                    onmouseover="this.style.backgroundColor= '#5865f2'">
+
+                                    <div class="text-block">
+                                          <a href="#" style="color: inherit; font-size: 1rem"
+                                                onclick="OpenWindow('/attendence/vacationdetail','연/월차 조회',1000,500);">
+                                                잔여 월차
+                                                <i class="fas fa-search "></i>
+                                          </a>
+                                    </div>
+                                    <span>
+                                          <a href="#" style="color: inherit;" onclick="OpenWindow('/attendence/vacationdetail','연/월차 조회',1000,500);">
+                                                <div style="font-weight: bold;">${vacationMonth - DelMonth}</div>
+                                          </a>
+                                    </span>
+                              </div>
+
   </div>
 </div>
 
@@ -93,21 +112,22 @@ starIcon.addEventListener('click', function() {
 
   <div class="select" style="display:flex; margin:15px; justify-content:space-around;">
 	  <div class="mine">
-	    <a href="#" onclick='open_in_frame("/attendence/mylist")' style="color: inherit; none ; font-weight: bold;">근태 조회</a>
+	    <a href="#" onclick='open_in_frame("/attendence/mylist")' style="  font-weight: bold;">근태 조회</a>
 	  </div>
  <c:if test="${loginUser.member_auth == 3}">
     <div class="department-or-team">
-        <a href="#" onclick='open_in_frame("/attendence/departmentlist")' style="color: inherit; font-weight: bold;">부서별 근태 조회</a>
+        <a href="#" onclick='open_in_frame("/attendence/departmentlist")' style=" font-weight: bold;">부서별 근태 조회</a>
     </div>
 </c:if>
 <c:if test="${loginUser.member_auth == 2}">
     <div class="department-or-team">
-        <a href="#" onclick='open_in_frame("/attendence/teamlist")' style="color: inherit; font-weight: bold;">팀별 근태 조회</a>
+        <a href="#" onclick='open_in_frame("/attendence/teamlist")' style=" font-weight: bold;">팀별 근태 조회</a>
     </div>
 </c:if>
 
 	</div>
-<iframe id='my_frame' style=" border:none; margin-left:15px;width: 1600px; height: 700px;">
+	<hr/>
+<iframe id='my_frame' class="col-sm-12"style=" border:none; margin-left:15px;width: 1600px; height: 700px;">
 <input type="hidden" name="${attendence.attendence_regDate }"/>
 <div class="flex" style="margin-top:10px;">
      <form class="flex" style="text-align:right;margin-right:10px;">

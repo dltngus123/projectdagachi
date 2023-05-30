@@ -55,7 +55,7 @@
 		<div class="card-header">
 			<h5 style="padding: none;">새 결재 작성</h5>
 		</div>
-		<form method="post" action="regist">
+		<form class="form"method="post" action="regist">
 			<div class="card-body">
 				<span style="margin-left: 10px;">양식<span style="color: red;">*</span></span>
 				<hr>
@@ -96,8 +96,8 @@
 					<div>
 						<span>작성자: </span><input name="member_id"
 							style="margin-left: 10px; width: 130px; height: 30px; border: none; background: #D7D7D7;"
-							type="text" value="${loginUser.member_id }" readonly> <input type="hidden"
-							id="member_id" value="${loginUser.member_id }">
+							type="text" value="${loginUser.member_name }" readonly> <input type="hidden"
+							id="member_id" value="${loginUser.member_id}">
 					</div>
 				</div>
 				<hr>
@@ -105,7 +105,7 @@
 
 				<hr>
 				<div class="step2" style="display: flex; justify-content: center;">
-					<div id="infobox" class="1" style="width: 175px;">
+					<div id="infobox" name="1" class="1" style="width: 175px;">
 
 
 						<div class="card" style="margin-right: 10px;">
@@ -128,7 +128,7 @@
 						</div>
 
 					</div>
-					<div id="infobox2" class="2" style="width: 175px;">
+					<div id="infobox2" name="2"  class="2" style="width: 175px;">
 						<div class="card" style="margin-right: 10px;">
 							<div class="card-header" style="background-color: #D7D7D7;">
 								<h3 class="card-title" style="margin-top: 2px;">결재선 2</h3>
@@ -148,7 +148,7 @@
 						</div>
 
 					</div>
-					<div id="infobox3" class="3" style="width: 175px;">
+					<div id="infobox3" name="3"  class="3" style="width: 175px;">
 						<div class="card">
 							<div class="card-header" style="background-color: #D7D7D7;">
 								<h3 class="card-title" style="margin-top: 2px;">결재선 3</h3>
@@ -182,11 +182,12 @@
 			</textarea>
 
 					<span style="float: right;">
-						<button type="submit" name="save" value="1"
+					<input type="hidden" name="save" value="1"/>
+						<button onclick="submit_go(1)"type="button" name="save" value="1"
 							class="btn btn-sidebar"
 							style="background-color: #5865F2; width: 100px;">제출</button>
 
-						<button type="submit" name="save" value="2"
+						<button onclick="submit_go(2)" type="button" name="save" value="2"
 							class="btn btn-sidebar"
 							style="background-color: #D7D7D7; width: 100px;">임시저장</button>
 					</span>
@@ -251,7 +252,23 @@ window.onload=function(){
 			);
 	}
 
-function optionChange(e) {
+
+
+  function submit_go(value) {
+    var levelSelect = document.getElementsByName('level')[0];
+    var form = document.getElementsByName('form')[0];
+    var infobox1 =document.getElementById('infobox');
+    var infobox2 =document.getElementById('infobox2');
+    var infobox3 =document.getElementById('infobox3');
+    if (levelSelect.value === '' || form.value==='' ||infobox1.name !== '0' ||infobox2.name !== '0' ||infobox3.name !== '0') {
+      alert('모든 필수 정보를 입력하세요.');
+      return;
+    }
+    $('.form').submit();    
+  }
+
+
+  function optionChange(e) {
 	  var teamoption1 = ["영업1팀", "영업2팀", "영업3팀"];
 	  var teamoption2 = ["관리1팀", "관리2팀", "관리3팀"];
 	  var teamoption3 = ["인사1팀", "인사2팀", "인사3팀"];
@@ -268,7 +285,11 @@ function optionChange(e) {
 	  }
 
 	  target.options.length = 0;
-
+        
+	  
+	   var opt1=document.createElement("option");
+	    opt1.innerHTML ="팀명을 선택하세요.";
+	    target.appendChild(opt1);
 	  for (var x in d) {
 	    var opt = document.createElement("option");
 	    opt.value = d[x];
@@ -344,35 +365,46 @@ closeModalBtn.addEventListener("click", () => {
 submitModalBtn.addEventListener("click", () => {
 	  modal.style.display = "none";
 	  document.body.style.overflow = "auto";
-	  if(modal.value == '1'){
-	  var info=document.getElementById("info1");
-	  var infobox=document.getElementById("infobox")
-	  }else if(modal.value=='2'){
-		  var info=document.getElementById("info2");
-		  var infobox=document.getElementById("infobox2")
-	  }else if(modal.value=='3'){
-		  var info=document.getElementById("info3");
-		  var infobox=document.getElementById("infobox3")
+	  if (modal.value == '1') {
+	    var info = document.getElementById("info1");
+	    var infobox = document.getElementById("infobox");
+	  } else if (modal.value == '2') {
+	    var info = document.getElementById("info2");
+	    var infobox = document.getElementById("infobox2");
+	  } else if (modal.value == '3') {
+	    var info = document.getElementById("info3");
+	    var infobox = document.getElementById("infobox3");
 	  }
-	  const approver2=document.getElementById("team");
-	  const approver3=document.getElementById("name");
-	  const app1=approver2.options[approver2.selectedIndex];
-	  const app2=approver3.options[approver3.selectedIndex];
-	
-	  info.innerText = app1.text+" "+app2.text;
+	  const approver2 = document.getElementById("team");
+	  const approver3 = document.getElementById("name");
+	  const app1 = approver2.options[approver2.selectedIndex];
+	  const app2 = approver3.options[approver3.selectedIndex];
+
+	  info.innerText = app1.text + " " + app2.text;
+
+	  // 기존의 ipt 요소 삭제
+	  var existingIpt = infobox.querySelector("input[name^='approver']");
+	  if (existingIpt) {
+	    infobox.removeChild(existingIpt);
+	  }
+
+	  // 새로운 ipt 요소 추가
 	  var ipt = document.createElement("input");
-	  ipt.type ="hidden";
-	  if(info.id=="info1"){
-		  ipt.name="approver1";
-	  }else if(info.id=="info2"){
-		  ipt.name="approver2";
-	  }else if(info.id=="info3"){
-		  ipt.name="approver3";
+	  ipt.type = "hidden";
+	  if (info.id == "info1") {
+	    ipt.name = "approver1";
+	    infobox.name = "0";
+	  } else if (info.id == "info2") {
+	    ipt.name = "approver2";
+	    infobox.name = "0";
+	  } else if (info.id == "info3") {
+	    ipt.name = "approver3";
+	    infobox.name = "0";
 	  }
-	  ipt.value=app2.value;
-	 infobox.appendChild(ipt);
-	
+	  ipt.value = app2.value;
+	  infobox.appendChild(ipt);
 	});
+
 function formChange(e) {
 	  var opt = e.options[e.selectedIndex];
 	  var divId = opt.value;

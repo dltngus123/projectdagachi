@@ -4,10 +4,24 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@include file="/WEB-INF/jsp/include/head.jspf" %>
+<script>
+   window.onload=function(){
+      bookMarkList();
+      checkedBookMark("/article/list");
+   }
+   
+</script>
 
-<div class="content-wrapper" >
+<div class="content-wrapper" style="background-color:white;">
 <div class="col-md-12">
-<h1>공유게시판</h1>
+<h1>
+   <a href='javascript:registBookMark("/article/list", "공유게시판 조회")'>
+   <i class="fas fa-star bookmarkCheck"></i>
+   </a>
+      <span style="color: black;">
+      공유 게시판
+      </span>
+   </h1>
 </div>
 <div class="col-md-12" style="display:flex;">
 <div class="col-md-6">

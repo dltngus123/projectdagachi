@@ -8,6 +8,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>dagachi</title>
 
+
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+
+
+
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -43,11 +52,8 @@
 	<!-- 테일윈드 불러오기 -->
 	<!-- 노말라이즈, 라이브러리까지 한번에 해결 -->
 
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
-
-
-
+<body class="hold-transition sidebar-mini layout-fixed " style="margin:0;">
+<!-- <div class="wrapper"> -->
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Right navbar links -->
@@ -57,86 +63,119 @@
         <a class="nav-link" data-toggle="dropdown" href="#">
          <i class="fas fa-star text-yellow"></i>
         </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="/resource/bootstrap/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Brad Diesel
-                  <span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">Call me whenever you can...</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>"/dagachi/projectM/list"
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="/resource/bootstrap/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  John Pierce
-                  <span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">I got your message bro</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <!-- Message Start -->
-            <div class="media">
-              <img src="/resource/bootstrap/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-              <div class="media-body">
-                <h3 class="dropdown-item-title">
-                  Nora Silvester
-                  <span class="float-right text-sm text-warning"><i class="fas fa-star"></i></span>
-                </h3>
-                <p class="text-sm">The subject goes here</p>
-                <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
-              </div>
-            </div>
-            <!-- Message End -->
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right favList">
+        	
         </div>
       </li>
      
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Notifications</span>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
+ <!-- Notification Menu -->
+        <li class="nav-item dropdown" id="notifications">
+          <a class="nav-link" data-toggle="dropdown" href="#">
+            <i class="far fa-bell"></i>
+            <span class="badge badge-warning navbar-badge cnt"></span>
           </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
-      </li>
+          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+            <div id="notifications_next">알림이없습니다.</div>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item dropdown-footer" onclick="deleteNotifications()">알림 삭제</button>
+          </div>
+          <div class="toastsDefaultBottomRight" style="display:none;"></div>
+          <script type="text/javascript">
+            $(function() {
+              function pollForNotifications() {
+                $.ajax({
+                  url: '/notification/check',
+                  method: 'GET',
+                  success: function(data) {
+                    // data에서 .dropdown-header의 내용 추출
+                    var dropdownHeaderContent = $(data).filter('.dropdown-header').text();
+                    // 정규 표현식을 사용하여 숫자 부분만 추출
+                    var numericContent = dropdownHeaderContent.match(/\d+/g);
+                    // 일치하는 부분이 있으면 사용하고, 그렇지 않으면 '0'으로 기본 설정.
+                    var count = numericContent ? numericContent[0] : '0';
+                    $(".badge.badge-warning.navbar-badge.cnt").html(count);
+                    $("#notifications_next").html(data);
+                  },
+                  error: function(jqXHR, textStatus, errorThrown) {
+                    // Handle error here
+                    console.error("notifications Error occurred: ", textStatus, errorThrown);
+                  }
+                });
+              }
+              pollForNotifications();
+              setInterval(pollForNotifications, 5000);
+            });
+            
+            toastr.options = {
+                   "closeButton": false,
+                   "debug": false,
+                   "newestOnTop": false,
+                   "progressBar": false,
+                   "positionClass": "toast-bottom-right",
+                   "preventDuplicates": false,
+                   "onclick": null,
+                   "showDuration": "300",
+                   "hideDuration": "1000",
+                   "timeOut": "5000",
+                   "extendedTimeOut": "1000",
+                   "showEasing": "swing",
+                   "hideEasing": "linear",
+                   "showMethod": "fadeIn",
+                   "hideMethod": "fadeOut",
+                   "delayOnHover": true
+               }
+
+               $(document).ready(function() {
+                   var closedNotifications = JSON.parse(localStorage.getItem('closedNotifications')) || [];
+
+                   var fetchNotifications = function() {
+                       $.ajax({
+                           url: '/notification/path',
+                           method: 'GET',
+                           success: function(data) {
+                               data.forEach(function(notification) {
+                                   if (!closedNotifications.includes(notification.notification_id)) {
+                                       toastr["info"](notification.notification_body)
+                                       closedNotifications.push(notification.notification_id);
+                                       localStorage.setItem('closedNotifications', JSON.stringify(closedNotifications));
+                                   }
+                               });
+                           },
+                           error: function(jqXHR, textStatus, errorThrown) {
+                               console.error("A notification error occurred: ", textStatus, errorThrown);
+                           }
+                       });
+                   };
+
+                   // Call once at the beginning
+                   fetchNotifications();
+
+                   // Then call every 5 seconds
+                   setInterval(fetchNotifications, 5000); // 5000ms = 5 seconds
+               });
+
+
+
+
+               function deleteNotifications() {
+                 $.ajax({
+                   url: '/notification/delete',
+                   method: 'GET',
+                   success: function(data) {
+                     console.log("삭제 완료");
+                     // 삭제 후 알림 다시 로드
+                     pollForNotifications();
+                   },
+                   error: function(jqXHR, textStatus, errorThrown) {
+                     // 에러 처리
+                     console.error("알림 삭제 오류 발생: ", textStatus, errorThrown);
+                   }
+                 });
+               }
+
+          </script>
+
+        </li>
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -160,36 +199,24 @@
 
 
 
-        <div class="info mt-2 " style="background-color:#5865F2; margin-left:15px; ">
-          <div class="d-block" style="color:white;">${loginUser.member_name }</div>
-          <div class="d-block" style="color:white;">${loginUser.member_department1 }</div>
+        <div class="info mt-2 " style=" margin-left:15px; ">
+          <div class="d-block" style=font-weight:bold;">${loginUser.member_name } <span style="font-size:0.5rem;">${loginUser.member_rank }</span></div>
+          <div class="d-block" style="">${loginUser.member_department1 }</div>
          
-         <div class="d-block" style="color:white;">
-    <c:if test="${not empty loginUser}">
-        <span id="memberStatusDisplay">
-            <c:set var="memberStatus" value="${loginUser.member_status}" />
-            <c:choose>
-                <c:when test="${memberStatus eq 1}">
-                    출근
-                </c:when>
-                <c:when test="${memberStatus eq 2}">
-                    퇴근
-                </c:when>
-                <c:when test="${memberStatus eq 3}">
-                    자리비움
-                </c:when>
-                <c:when test="${memberStatus eq 4}">
-                    휴가
-                </c:when>
-                <c:when test="${memberStatus eq 5}">
-                    조퇴
-                </c:when>
-                <c:otherwise>
-                    상태 없음
-                </c:otherwise>
-            </c:choose>
-        </span>
-    </c:if>
+         <div class="d-block" style="">
+       <c:if test="${loginUser.member_status eq 1 }">
+       <span class="badge bg-primary">출근</span>
+     </c:if>
+       
+       <c:if test="${loginUser.member_status eq 4 }">
+       <span class="badge bg-waring">연차</span>
+     </c:if>
+       <c:if test="${loginUser.member_status eq 5 }">
+       <span class="badge bg-waring">월차</span>
+     </c:if>
+       <c:if test="${loginUser.member_status eq 3 }">
+       <span class="badge bg-danger">자리비움</span>
+     </c:if>
 </div>
 
         </div>
@@ -198,14 +225,14 @@
     <select class="form-control" name="perPageNum" id="perPageNum" onchange="updateMemberStatusDisplay()">
         <option value="" selected="상태">상태</option>
         <option value="1">출근</option>
-        <option value="2">퇴근</option>
         <option value="3">자리비움</option>
     </select>
 </div>
 
-<button onclick="changeStatus()" class="btn btn-sidebar" style="margin-left:5px; margin-top:5px; background-color:#AAAAAA;">상태변경</button>
-<button onclick="" class="btn btn-sidebar" style="margin-left:15px; margin-top:5px; background-color:#AAAAAA;">마이페이지</button>
-<button onclick="logout()" class="btn btn-sidebar" style="margin-left:15px; margin-top:5px; background-color:#AAAAAA;">로그아웃</button>
+<button onclick="changeStatus(); location.reload();
+" class="btn btn-sidebar" style="margin-left:5px; margin-top:5px; background-color:#e2e2e2; border:none; color:black;">상태변경</button>
+
+<button onclick="logout()" class="btn btn-sidebar" style="margin-left:15px; margin-top:5px; background-color:#e2e2e2; border:none; color:black; width:200px;">로그아웃</button>
 
       </div>
 
@@ -240,10 +267,7 @@
           		<a href="/approval/list?Type=approver&save=1">수신</a>
           	</div>
           	
-          	<div>
-          		<a href="/approval/list?Type=save&save=2">임시저장</a>
-         	</div>
-
+     
         </div>
       </div>
     </div>
@@ -315,7 +339,7 @@
       <a href="/notice/noticeList">공지사항</a>
     </div>
     <div>
-      <a href="">공유 게시판</a>
+      <a href="/article/list">공유 게시판</a>
     </div>
      <div id="card8" style="text-align: center;">
         <div class="card-header" id="headingFive">
@@ -449,28 +473,7 @@
 
 
 <script>
-function updateMemberStatusDisplay() {
-    var selectedStatus = $("#perPageNum").val();
-    var memberStatusDisplay = $("#memberStatusDisplay");
 
-    if (selectedStatus === "") {
-        memberStatusDisplay.text("출근");
-    } else {
-        switch (selectedStatus) {
-            case "1":
-                memberStatusDisplay.text("출근");
-                break;
-            case "2":
-                memberStatusDisplay.text("퇴근");
-                break;
-            case "3":
-                memberStatusDisplay.text("자리비움");
-                break;
-            default:
-                memberStatusDisplay.text("상태 없음");
-        }
-    }
-}
 
 function changeStatus() {
     var selectedStatus = $("#perPageNum").val();
@@ -484,21 +487,24 @@ function changeStatus() {
         success: function(response) {
             console.log(response);
             
-            // Update memberStatusDisplay after successful response
-            updateMemberStatusDisplay(memberStatus);
+           
             
-            window.location.href = "/usr/home/main";
+            location.reload();
         },
         error: function(error) {
             console.log(error);
-            window.location.href = "/usr/home/main";
+            window.location.href = "redirect:/usr/home/main";
         }
     });
 }
 
 // Call updateMemberStatusDisplay on page load to initialize the member status display
 $(document).ready(function() {
-    updateMemberStatusDisplay();
+    
 });
+/* 
+window.onload=function(){
+	   autoOff();
+	} */
 </script>
 

@@ -93,17 +93,11 @@ DELETE FROM article WHERE article_id =#{article_id}
 </delete>
 
 <insert id="articleInsert">
-insert into article
-set board_id=1,
-article_regdate=now(),
-article_register=#{article_register},
-article_title=#{article_title},
-article_body=#{article_body},
-article_attach=#{article_attach},
-article_important=#{article_important}
-
+  INSERT INTO article
+  (board_id, article_regdate, article_register, article_title, article_body, article_attach, article_important)
+  VALUES
+  (1, NOW(), #{article_register}, #{article_title}, #{article_body}, #{article_attach}, #{article_important})
 </insert>
-
 
 
 

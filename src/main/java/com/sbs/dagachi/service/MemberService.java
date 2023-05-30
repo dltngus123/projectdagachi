@@ -86,7 +86,14 @@ public class MemberService {
 	public List<Member> almostName(String member_name){
         return memberRepository.almostName(member_name);
      }
-  
+public Member findId(String name,String email) {
+		
+		return memberRepository.findId(name, email);
+	}
+	public Member findPwd(String id,String name) {
+		
+		return memberRepository.findPwd(id, name);
+	}
 	
 	
 }

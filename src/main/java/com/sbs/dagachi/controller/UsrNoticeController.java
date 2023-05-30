@@ -5,6 +5,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 import org.springframework.core.io.Resource;
@@ -25,6 +30,7 @@ import com.sbs.dagachi.vo.Member;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 public class UsrNoticeController {
@@ -73,48 +79,43 @@ public class UsrNoticeController {
 	}
 	
 	@GetMapping("/notice/download")
-	public void downloadFile(@RequestParam("article_id") int articleId, HttpServletResponse response) {
-	    Article article = articleService.getArticleById(articleId);
+    public void downloadFile(@RequestParam("article_id") int articleId, HttpServletResponse response) {
+        Article article = articleService.getArticleById(articleId);
 
-	    if (article == null) {
-	        
-	        return;
-	    }
+        if (article == null || article.getArticle_attach() == null) {
+            return;
+        }
 
-	    String filePath = "c:/upload/file/" + article.getArticle_attach();
+        String filePath = "c:/upload/file/" + article.getArticle_attach();
 
-	    Resource resource;
-	    try {
-	        resource = new UrlResource(new File(filePath).toURI());
-	    } catch (MalformedURLException e) {
-	      
-	        return;
-	    }
+        Resource resource;
+        try {
+            resource = new UrlResource(new File(filePath).toURI());
+        } catch (MalformedURLException e) {
+            return;
+        }
 
-	    if (resource.exists() && resource.isReadable()) {
-	        response.setContentType("application/octet-stream");
-	        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"");
+        if (resource.exists() && resource.isReadable()) {
+            response.setContentType("application/octet-stream");
+            response.setHeader(HttpHeaders.CONTENT_DISPOSITION,
+                    "attachment; filename=\"" + resource.getFilename() + "\"");
 
-	        try (InputStream inputStream = resource.getInputStream();
-	             OutputStream outputStream = response.getOutputStream()) {
-	            byte[] buffer = new byte[1024];
-	            int bytesRead;
-	            while ((bytesRead = inputStream.read(buffer)) != -1) {
-	                outputStream.write(buffer, 0, bytesRead);
-	            }
-	            outputStream.flush(); 
-	        } catch (IOException e) {
-	            
-	            return;
-	        }
-	    } else {
-	      
-	        return;
-	    }
-	}
-
-
-
+            try (InputStream inputStream = resource.getInputStream();
+                    OutputStream outputStream = response.getOutputStream()) {
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, bytesRead);
+                }
+                outputStream.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
+        } else {
+            return;
+        }
+    }
 	
 	@RequestMapping("/notice/domodify")
 	public String showmodify(HttpSession session,Model model,@RequestParam("article_id") String article_id) {
@@ -149,37 +150,55 @@ public class UsrNoticeController {
 	}
 	
 	@RequestMapping(value = "/notice/insert", method = { RequestMethod.GET, RequestMethod.POST })
-	public String insertArticle(HttpSession session,
-	        @RequestParam(value = "article_register", required = false) String article_register,
-	        @RequestParam(value = "article_title", required = false) String article_title,
-	        @RequestParam(value = "article_body", required = false) String article_body,
-	        @RequestParam(value = "article_attach", required = false) MultipartFile article_attach,
-	        @RequestParam(value = "article_important", required = false) String article_important
-	) {
-	    Member loginUser = (Member) session.getAttribute("loginUser");
-	    article_register = loginUser.getMember_id();
+    public String insertArticle(HttpSession session,
+            @RequestParam(value = "article_register", required = false) String articleRegister,
+            @RequestParam(value = "article_title", required = false) String articleTitle,
+            @RequestParam(value = "article_body", required = false) String articleBody,
+            @RequestParam(value = "article_attach", required = false) MultipartFile articleAttach,
+            @RequestParam(value = "article_important", required = false) String articleImportant) {
+        Member loginUser = (Member) session.getAttribute("loginUser");
+        articleRegister = loginUser.getMember_id();
 
-	    // 파일 업로드 처리
-	    String filename = null;
-	    if (article_attach != null && !article_attach.isEmpty()) {
-	        try {
-	            filename = article_attach.getOriginalFilename();
-	            String filePath = "c:/upload/file/" + filename;
-	            article_attach.transferTo(new File(filePath));
-	           
-	        } catch (IOException e) {
-	           
-	            e.printStackTrace();
-	        }
-	    } else {
-	       
-	    }
+        // 파일 업로드
+        String filename = null;
+        String fileContent = null;
+        String fileSize = null;
+        String fileMimeType = null;
+        if (articleAttach != null && !articleAttach.isEmpty()) {
+            try {
+                filename = articleAttach.getOriginalFilename();
+                fileContent = new String(articleAttach.getBytes(), StandardCharsets.UTF_8);
+                fileSize = String.valueOf(articleAttach.getSize());
+                fileMimeType = articleAttach.getContentType();
 
-	    articleService.articleInsert(article_register, article_title, article_body, filename, article_important);
+                String fileUploadDir = "c:/upload/file/";
 
-	    return "redirect:/notice/noticeList";
-	}
+                try {
 
+                    Path uploadPath = Paths.get(fileUploadDir);
+                    if (!Files.exists(uploadPath)) {
+                        Files.createDirectories(uploadPath);
+                    }
+
+                    Path filePath = uploadPath.resolve(filename);
+
+                    Files.copy(articleAttach.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+               
+            }
+        }
+
+        articleService.articleInsert(articleRegister, articleTitle, articleBody, filename, articleImportant,
+                fileSize, fileMimeType);
+
+        return "redirect:/notice/noticeList";
+    }
 
 
 

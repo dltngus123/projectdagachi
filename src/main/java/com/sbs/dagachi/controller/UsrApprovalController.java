@@ -48,11 +48,12 @@ public class UsrApprovalController {
 		
 	}
 	
-	@GetMapping("main")
-	
+	@GetMapping("/main")
+
 	public void main(Model model,HttpSession session,String st,String sk ,String status) {
 	Member member=(Member)session.getAttribute("loginUser");
 	String user= member.getMember_id();
+	List<Member> memberList= memberService.getMember();
 	st= "";
 	sk= "";
 	status= "";
@@ -98,14 +99,14 @@ public class UsrApprovalController {
 	
 	model.addAttribute("approvalList",approval_documentService.getA_documentListByRegister(user, st, sk, status,save,itemsCountInAPage,page));
 	model.addAttribute("approverList",approval_documentService.getReceiveA_documentListByApprover(user, st, sk, status,itemsCountInAPage,page));
-
+	model.addAttribute("memberList",memberList);
 	  
 		
 	}
 	
 	@GetMapping("list")
 	public void list(Model model,HttpSession session,@RequestParam(defaultValue = "1") int page,String st,String sk,String status, String Type,String save) {
-	
+		List<Member> memberList= memberService.getMember();
 		String loginUser="loginUser";
 		Member member = (Member) session.getAttribute(loginUser);
 		String user= member.getMember_id();
@@ -154,22 +155,21 @@ public class UsrApprovalController {
 		
 	
 
-
-	
+		model.addAttribute("form",formService.getFormList());
+		model.addAttribute("memberList",memberList);
 		model.addAttribute("page", page);
 		model.addAttribute("pagesCount", pagesCount);
 		
 		
 	}
-	@GetMapping("registForm")
+	@GetMapping("/registForm")
 	public void registForm(Model model) {
 		model.addAttribute("form",formService.getFormList());
 		
 	}
 	
 	
-	@PostMapping("regist")
-
+	@PostMapping("/regist")
 	public String regist(HttpSession session,String approver1,String approver2,String approver3,String title,String content, String save,String level,String form) {
 	
 		Member member= (Member)session.getAttribute("loginUser");
@@ -189,11 +189,10 @@ public class UsrApprovalController {
 		ad.setApproval_register(user);
 		
 		approval_documentService.insertA_document(ad);
-		return "/approval/main";
 		
+		return "/approval/registSuccess";
 	}
-	@GetMapping("detail")
-	
+	@GetMapping("/detail")
 	public void detail(Model model,String approval_id) {
 		 Approval_Document ap=approval_documentService.getA_document(Integer.parseInt(approval_id));
 		 Member member= memberService.getMemberById(ap.getApproval_register());
@@ -213,9 +212,9 @@ public class UsrApprovalController {
 		 model.addAttribute("ap",ap);
 		
 	}
-	@PostMapping("approvalRegist")
-	@ResponseBody
-	public void approvalRegist(Model model,String approver,String status,String approval_id,String comment) {
+	@PostMapping("/approvalRegist")
+	public String approvalRegist(Model model,String approver,String status,String approval_id,String comment) {
+		
 		Approval approval = new Approval(); 
 		approval.setA_approver(approver);
 		approval.setA_comment(comment);
@@ -234,12 +233,13 @@ public class UsrApprovalController {
 			approval_status=2;
 			approval_documentService.updateA_status(Integer.parseInt(approval_id), approval_status);
 		}
-				
-				
 		
+		model.addAttribute("approval_id",approval_id);
+			   
+		return "/approval/approvalRegistSuccess";
 	}
 
-	@GetMapping("sendNameList")
+	@GetMapping("/sendNameList")
 	@ResponseBody
 	public List<Member> sendNameList(Model model, String teamname1) {
 	    if (teamname1 == null) {

@@ -32,7 +32,7 @@
     	<div class="card-header">
     		<h5 style="padding:10px;">${title}</h5>
     		</div>
-          <div class="card-body" style=" height:100vh;">
+          <div class="card-body" >
          
             <div class="card">
               <div class="card-body">
@@ -80,11 +80,19 @@
                           <fmt:formatDate value="${approval.approval_registdate }" pattern="yyyy.MM.dd HH.mm" />
                         </td>
                         <td>
-                          업무협조
+                           <c:forEach var="form" items="${form }">
+                          <c:if test="${form.form_id eq approval.form_id }">
+                           ${form.form_name }
+                          </c:if>
+                         </c:forEach>
                         </td>
                         <td>${approval.approval_title } <c:if test="${approval.approval_level eq 1 }"><span class="badge bg-danger">긴급</span></c:if></td>
                         <td>
-                          ${approval.approval_register}
+                      <c:forEach items="${memberList }" var="member">
+                          <c:if test="${member.member_id eq approval.approval_register }">
+                           ${member.member_name } ${member.member_rank }
+                          </c:if>
+                          </c:forEach>
                         </td>
                         <td>
                           <c:if test="${approval.approval_status eq 0}"><span class="badge bg-warning">대기</span></c:if>

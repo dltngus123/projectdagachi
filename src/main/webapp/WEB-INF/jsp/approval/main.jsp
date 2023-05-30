@@ -3,9 +3,6 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<%@ include file="../include/head.jspf" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <style>
   .card-body {
     width: 90%;
@@ -46,13 +43,24 @@
     white-space: nowrap;
     border-bottom: 1px solid #ddd;
   }
-
-
- 
 </style>
-
-
+<%@ include file="../include/head.jspf" %>
 <div class="content-wrapper">
+<script>
+   window.onload=function(){
+      bookMarkList();
+      checkedBookMark("/approval/main");
+   }
+   
+</script>
+<h1>
+   <a href='javascript:registBookMark("/approval/main", "전자결재 메인")'>
+   <i class="fas fa-star bookmarkCheck"></i>
+   </a>
+      <span style="color: black;">
+      전자 결재
+      </span>
+   </h1>
   <div>
     <div class="card">
 	<div class="infobox" style="display:flex; justify-content:center; width:90%; margin:auto; margin-bottom:10px; margin-top:10px;">
@@ -113,7 +121,11 @@
                     
                         <td>${approval.approval_title }<c:if test="${approval.approval_level eq 1 }"><span class="badge bg-danger">긴급</span></c:if></td>
                         <td >
-                          ${approval.approval_register}
+                       <c:forEach items="${memberList }" var="member">
+                          <c:if test="${member.member_id eq approval.approval_register }">
+                           ${member.member_name } ${member.member_rank }
+                          </c:if>
+                          </c:forEach>
                         </td>
                         <td >
                           <c:if test="${approval.approval_status eq 0}"><span class="badge bg-warning">대기</span></c:if>
@@ -162,9 +174,13 @@
                           </c:if>
                          </c:forEach>
                         </td>
-                        <td>${approver.approval_title }<c:if test="${approval.approval_level eq 1 }"><span class="badge bg-danger">긴급</span></c:if></td>
+                        <td>${approver.approval_title }<c:if test="${approvel.approval_level eq 1 }"><span class="badge bg-danger">긴급</span></c:if></td>
                         <td >
-                          ${approver.approval_register}
+                        <c:forEach items="${memberList }" var="member">
+                          <c:if test="${member.member_id eq approver.approval_register }">
+                           ${member.member_name } ${member.member_rank }
+                          </c:if>
+                          </c:forEach>
                         </td>
                         <td >
                           <c:if test="${approver.approval_status eq 0}"><span class="badge bg-warning">대기</span></c:if>
@@ -183,31 +199,9 @@
 				</div>
 				</c:if>
               </div>
-              
-              
-              
-              
-              
-              
-              
             </div>
-          
-          		
-     
-
       </div>
     </div>
-
   </div>
   
-  
-  <script>
- 
-  
-  
-  </script>
- 
-
-
-
 <%@include file="../include/foot.jspf" %>

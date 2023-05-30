@@ -63,7 +63,7 @@
 		<div style="paddin:none;margin-top:10px; margin-left:40px; font-size:15px;"><input type="checkbox">아이디 기억하기</input></div>
 		<button type="submit" class="btn btn-block btn-primary button">LOGIN</button>
 		</form>
-	     <a href=""style="display:block; padding:none;margin-top:20px; margin-left:170px;">아이디/비밀번호 찾기</a>
+	     <a href="javascript:window.open('../common/forget', 'dd', 'width=800,height=800');"style="display:block; padding:none;margin-top:20px; margin-left:170px;">아이디/비밀번호 찾기</a>
 	
 	</div>	
 

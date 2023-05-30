@@ -68,8 +68,7 @@ function WirteImgThumb(contextPath){
 	      target.style.backgroundSize="cover";
 	   }
 	   
-	   
-	 
+	 }
 
 function MemberPictureThumb(contextPath){
     for(var target of document.querySelectorAll('.manPicture')){   
@@ -81,4 +80,58 @@ function MemberPictureThumb(contextPath){
       target.style.backgroundSize="cover";
     }
 }
-	}
+
+function bookMarkList(){
+            $.ajax({
+               url:'/usr/home/favList',
+               dataType:'text',
+               data:'',
+               traditional: true,
+               success: function(data){
+                  $('.favList').html(data);
+               }
+            
+            });
+        }
+function checkedBookMark(murl){
+   $.ajax({
+      url: '/usr/home/dupCheck',
+      dataType: 'text',
+      data:{
+         mcode:murl
+      },
+      traditional: true,
+      success:function(data){
+         if(data=="ok"){
+            
+         }else{
+            $('.bookmarkCheck').addClass('text-yellow');
+         }
+      }
+   });
+}
+function registBookMark(murl,pagename){
+   $.ajax({
+      url:'/usr/home/registFav',
+      dataType:'text',
+      data: {
+         mcode: murl,
+         pageTitle: pagename
+      },
+      traditional: true,
+      success: function(data){
+         if(data=="ok"){
+            $('.bookmarkCheck').addClass('text-yellow');
+            bookMarkList();
+         }else{
+            $('.bookmarkCheck').removeClass('text-yellow');
+            bookMarkList();
+         }
+      }
+   });
+}
+
+
+
+
+	

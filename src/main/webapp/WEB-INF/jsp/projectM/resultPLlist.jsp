@@ -36,7 +36,7 @@
 					</div>
 					<div class="row">
 						<fmt:formatDate var="endDate" value="${pl.pl_EndDate }" pattern="yyyy년 MM월 dd일"/>
-						<div class="col-sm-6" style="font-size:12px;">마감기한: ${endDate }</div>
+						<div class="col-sm-6" style="font-size:0.7rem;">마감기한: ${endDate}</div>
 						<!-- 여기다가 클릭시 다른 업무로 업무 파싱하기 -->
 					</div>
 					<div class="row">
@@ -59,13 +59,13 @@
 										<c:if test="${pm.pm_manager eq '' ||empty pm.pm_manager  }">
 										<li class="pl${pl.pl_Id}pm${pm.pm_Id}"style="list-style: none;"onclick="moveToRight('${pl.pl_Id}','${pm.pm_Id }');">
 											<div class="row">
-												<div class="col-sm-7 pl${pl.pl_Id}pm${pm.pm_Id}name">
+												<div class="col-sm-5 pl${pl.pl_Id}pm${pm.pm_Id}name">
 													${pm.pm_name }
 												</div>
-												<div class="col-sm-3 ">
+												<div class="col-sm-5 ">
 													${pm.extra_pm_manager_name }
 												</div>
-												<div class="col-sm-2">
+												<div class="col-sm-1">
 													<c:if test="${pm.pm_status eq '0'}">
 														<span class="badge bg-primary">
 														대기
@@ -89,13 +89,13 @@
 										<c:if test="${pm.pm_manager ne '' ||!empty pm.pm_manager  }">
 										<li class="pl${pl.pl_Id}pm${pm.pm_Id}"style="list-style: none;"onclick="moveToRightRegisted('${pl.pl_Id}','${pm.pm_Id }');">
 											<div class="row">
-												<div class="col-sm-7 pl${pl.pl_Id}pm${pm.pm_Id}name">
+												<div class="col-sm-5 pl${pl.pl_Id}pm${pm.pm_Id}name">
 													${pm.pm_name }
 												</div>
-												<div class="col-sm-3 ">
+												<div class="col-sm-5 ">
 													${pm.extra_pm_manager_name }
 												</div>
-												<div class="col-sm-2">
+												<div class="col-sm-1">
 													<c:if test="${pm.pm_status eq '0'}">
 														<span class="badge bg-primary">
 														대기
