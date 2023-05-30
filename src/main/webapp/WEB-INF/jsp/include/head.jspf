@@ -189,7 +189,7 @@
     </a>
 
     <!-- Sidebar -->
-    <div class="sidebar">
+    <div class="sidebar" >
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex flex-wrap" style="background-color:white; justify-content:center;">
 <div id="userimg" class="col-sm-3">
@@ -237,9 +237,9 @@
       </div>
 
       <!-- Sidebar Menu -->
-<nav class="mt-2" style="margin: 15px;">
-  <div class="accordion" id="accordion">
-    <div id="card1" style="text-align: center;">
+<nav class="mt-2 nav-sidebar" style="margin: 15px;">
+  <div class="accordion nav-item" id="accordion">
+    <div id="card1" style="text-align: center;" class="nav-link active">
       <div class="card-header" id="headingOne">
         <h2 class="mb-0">
           <button class="btn btn-link" type="button"
