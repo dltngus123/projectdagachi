@@ -11,6 +11,7 @@
    
 </script>
    <div class="content-wrapper">
+   <div class="content-header">
   <h1>
    <a href='javascript:registBookMark("/dagachi/favPhoneBook/favList", "중요 연락처")'>
    <i class="fas fa-star bookmarkCheck"></i>
@@ -19,6 +20,7 @@
       중요 연락처
       </span>
    </h1>
+   </div>
 	<div class="col-12">
 	  <div class="card">
 	    <div class="card-header row">

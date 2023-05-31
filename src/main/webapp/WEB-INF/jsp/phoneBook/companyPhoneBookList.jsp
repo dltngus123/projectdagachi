@@ -10,7 +10,7 @@
    
 </script>
    <div class="content-wrapper">
-   
+   <div class="content-header">
    <h1>
    <a href='javascript:registBookMark("/dagachi/phoneBook/companyPhoneBookList", "사내 주소록")'>
    <i class="fas fa-star bookmarkCheck"></i>
@@ -19,6 +19,7 @@
       사내 주소록
       </span>
    </h1>
+   </div>
    <div class="col-12">
      <div class="card">
        <div class="card-header row">

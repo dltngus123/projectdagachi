@@ -4,28 +4,22 @@
  <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@include file="../include/head.jspf"%>
-<div class="content-wrapper mt-4">
-   
+<div class="content-wrapper">
+   <div class="content-header">
    <h1>
    <i class="fas fa-star text-yellow"></i>
-   	회의록
+   	회의록 등록
    </h1>
+   </div>
 	<div class="col-12">
 	  <div class="card">
-	    <div class="card-header row">
-	      <!-- <h3 class="card-title"></h3> -->
-	      <h3 class="row ml-4 text-bold">
- 	    		회의록 등록
-   		  </h3>
-	
 
-	  </div>
-	  <section class="col-11 mx-auto content-body">
+	  <section class="col-8 mx-auto content-body">
      	
      	
      	<form action="registSuccess" role="form">
      	
-     	<div class="mt-4">
+     	<div class="mt-4 justify-content-center">
 
      		
 
@@ -67,7 +61,7 @@
      		</div>
      		<div id="recommend"class="row col-sm-12" style="display:none; position:absolute; z-index:10;">
 	     		<div class="col-sm-2 mr-2"></div>
-	     		<div class=" border bg-white col-sm-6 memberResultSection" style="z-index: 0; max-height:200px; overflow:scroll-; border-radius:10px;">
+	     		<div class=" border bg-white col-sm-6 memberResultSection" style="z-index: 0; max-height:200px; overflow-y:scroll; border-radius:10px;">
 	     		
 	     		</div>
      		</div>

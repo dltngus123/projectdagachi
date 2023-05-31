@@ -7,20 +7,27 @@
 <input type="hidden" name="${attendence.attendence_regDate }"/>
 
 	<div class="flex" style="margin-top:10px;">
- <form class="flex" style="text-align:right;margin-right:10px;">
+ <form class="" style="text-align:right;margin-right:10px;">
+ 	<div class="row col-sm-12 btns">
+ 	<div class="col-sm-7 text-left"><div style="margin:10px;">근태 : <span class="text-blue-700">${attendenceCount }</span> 건</div></div>
   <input type="hidden" name="reservation_code" value="${param.reservation_code}" />
-  <select name="searchKeywordTypeCode" data-value="${param.searchKeywordTypeCode}" id="searchKeywordTypeCode" class="select select-bordered">
+  	<div class="row col-sm-5">
+  <select name="searchKeywordTypeCode" data-value="${param.searchKeywordTypeCode}" id="searchKeywordTypeCode" class="col-sm-3 form-control select select-bordered">
     <option disabled="disabled">검색타입</option>
     <option value="attendence_status">출.퇴근상태</option>
     <option value="attendence_regDate">날짜</option>
     <option value="room_code,reservation_member">출.퇴근상태,날짜</option>
   </select>
-  <input name="searchKeyword" type="text" class="ml-2 w-72 input input-bordered" placeholder="검색어" maxlength="20" value="${param.searchKeyword}" id="searchKeyword" />
-  <button type="submit" style="background-color:#5865F2; color:white; border:none;">검색</button>
+  <input name="searchKeyword" type="text" class="col-sm-8 form-control" placeholder="검색어" maxlength="20" value="${param.searchKeyword}" id="searchKeyword" />
+  <button type="submit" class="col-sm-1 btn form-control btn-default" onclick="">
+                 <i class="fas fa-search"></i>
+       </button>
+  	</div>
+ 	</div>
 </form>
     
   </div>
-  <div style="margin:10px;">근태 : <span class="text-blue-700">${attendenceCount }</span> 건</div>
+  
   
 	<div class="content-list" style="margin:10px;">
 		<div class="mt-3">

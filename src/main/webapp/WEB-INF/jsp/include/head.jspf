@@ -46,11 +46,11 @@
 <!-- //fullcalendar 언어 설정관련 script -->
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales-all.js"></script>
 
-	<!-- 제이쿼리 불러오기 -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	
-	<!-- 테일윈드 불러오기 -->
-	<!-- 노말라이즈, 라이브러리까지 한번에 해결 -->
+   <!-- 제이쿼리 불러오기 -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   
+   <!-- 테일윈드 불러오기 -->
+   <!-- 노말라이즈, 라이브러리까지 한번에 해결 -->
 
 <body class="hold-transition sidebar-mini layout-fixed " style="margin:0;">
 <!-- <div class="wrapper"> -->
@@ -64,7 +64,7 @@
          <i class="fas fa-star text-yellow"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right favList">
-        	
+           
         </div>
       </li>
      
@@ -183,9 +183,9 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color:#5865F2;">
     <!-- Brand Logo -->
-    <a href="/usr/home/main" class="brand-link">
-      <img src="/resource/bootstrap/dist/img/AdminLTELogo.png" alt="dagachi Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">dagachi</span>
+      <a href="/usr/home/main" class="brand-link row" style="text-align:center; color:">
+      <span class="text-bold" style="font-size:2rem; border:2px solid; padding:4px; ">多</span>
+      <span class="text-bold" style="font-size: 1.5rem;">dagachi</span>
     </a>
 
     <!-- Sidebar -->
@@ -239,7 +239,7 @@
       <!-- Sidebar Menu -->
 <nav class="mt-2 nav-sidebar" style="margin: 15px;">
   <div class="accordion nav-item" id="accordion">
-    <div id="card1" style="text-align: center;" class="nav-link active">
+    <div id="card1" style="text-align: center;" >
       <div class="card-header" id="headingOne">
         <h2 class="mb-0">
           <button class="btn btn-link" type="button"
@@ -252,21 +252,21 @@
            aria-labelledby="headingOne" data-parent="#accordion">
         <div class="card-body">
         <div>
-	
-          		<a href="/approval/main">메인</a>
-        	 </div>
-        	  <div>
-	
-          		<a href="/approval/registForm">새 결제 작성</a>
-        	 </div>
+   
+                <a href="/approval/main">메인</a>
+            </div>
+             <div>
+   
+                <a href="/approval/registForm">새 결제 작성</a>
+            </div>
          <div>
-	
-          		<a href="/approval/list?Type=approval&save=1">발신</a>
-        	 </div>
-        	<div>
-          		<a href="/approval/list?Type=approver&save=1">수신</a>
-          	</div>
-          	
+   
+                <a href="/approval/list?Type=approval&save=1">발신</a>
+            </div>
+           <div>
+                <a href="/approval/list?Type=approver&save=1">수신</a>
+             </div>
+             
      
         </div>
       </div>
@@ -284,17 +284,17 @@
            aria-labelledby="headingTwo" data-parent="#accordion">
         <div class="card-body">
          <div>
-          		<a href="/dagachi/projectL/list">부서별 업무 조회</a>
-		
-        	 </div>
-        	  <div>
+                <a href="/dagachi/projectL/list">부서별 업무 조회</a>
+      
+            </div>
+             <div>
  
-          		<a href="/dagachi/projectM/list">팀별 업무 조회</a>
-          		
-        	 </div>
-        	<div>
-          		<a href="/dagachi/projectS/list">업무 등록 및  수주</a>
-          	</div>
+                <a href="/dagachi/projectM/list">팀별 업무 조회</a>
+                
+            </div>
+           <div>
+                <a href="/dagachi/projectS/list">업무 등록 및  수주</a>
+             </div>
      
 
         </div>
@@ -314,11 +314,11 @@
         <div class="card-body">
           <div>
 
-          		<a href="/schedule/commonCal">사내일정</a>
-        	 </div>
-        	<div>
-          		<a href="/schedule/personalCal">개인일정</a>
-          	</div>
+                <a href="/schedule/commonCal">사내일정</a>
+            </div>
+           <div>
+                <a href="/schedule/personalCal">개인일정</a>
+             </div>
 
         </div>
       </div>
@@ -398,18 +398,18 @@
            aria-labelledby="headingFour" data-parent="#accordion">
         <div class="card-body">
 
-        	<div>
-          		<a href="/dagachi/favPhoneBook/favList">중요주소록</a>
-        	 </div>
-        	<div>
-          		<a href="/dagachi/phoneBook/showList?phone_book_type=1">공유주소록</a>
-          	</div>
-          	<div>
-          		<a href="/dagachi/phoneBook/showList?phone_book_type=2">개인주소록</a>
-         	</div>
-         	<div>
-          		<a href="/dagachi/phoneBook/showList?phone_book_type=3">휴지통</a>
-          	</div>
+           <div>
+                <a href="/dagachi/favPhoneBook/favList">중요주소록</a>
+            </div>
+           <div>
+                <a href="/dagachi/phoneBook/showList?phone_book_type=1">공유주소록</a>
+             </div>
+             <div>
+                <a href="/dagachi/phoneBook/showList?phone_book_type=2">개인주소록</a>
+            </div>
+            <div>
+                <a href="/dagachi/phoneBook/showList?phone_book_type=3">휴지통</a>
+             </div>
 
         </div>
       </div>
@@ -429,7 +429,7 @@
            aria-labelledby="headingFour" data-parent="#accordion">
         <div class="card-body">
 
-        	
+           
 
         </div>
       </div>
@@ -444,29 +444,29 @@
   
   <script>
   function logout() {
-	
-	  $.ajax({
-	    url: '/common/logout',
-	    type: 'GET',
-	    data: {
-	    	  attendence_member: '${loginUser.member_id}',
-	    	  member_team: '${loginUser.member_team}',
-	    	  member_department: '${loginUser.member_department}'
-	    	},
-	    success: function(response) {
-	     
-	      console.log(response);
-	      
-	     
-	      window.location.href = "/common/logout";
-	    },
-	    error: function(error) {
-	      
-	      console.log(error);
-	      window.location.href = "/common/logout";
-	    }
-	  });
-	}
+   
+     $.ajax({
+       url: '/common/logout',
+       type: 'GET',
+       data: {
+            attendence_member: '${loginUser.member_id}',
+            member_team: '${loginUser.member_team}',
+            member_department: '${loginUser.member_department}'
+          },
+       success: function(response) {
+        
+         console.log(response);
+         
+        
+         window.location.href = "/common/logout";
+       },
+       error: function(error) {
+         
+         console.log(error);
+         window.location.href = "/common/logout";
+       }
+     });
+   }
 
 </script>
 
@@ -504,7 +504,6 @@ $(document).ready(function() {
 });
 /* 
 window.onload=function(){
-	   autoOff();
-	} */
+      autoOff();
+   } */
 </script>
-

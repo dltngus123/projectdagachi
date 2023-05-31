@@ -29,6 +29,7 @@
 </script>
 <input type="hidden" name="${attendence.attendence_regDate }"/>
 <div class="content-wrapper" style="background-color:white;">	
+<div class="content-header">
 <h1>
    <a href='javascript:registBookMark("/attendence/list", "근태 조회")'>
    <i class="fas fa-star bookmarkCheck"></i>
@@ -37,6 +38,7 @@
       근태 관리
       </span>
    </h1>
+</div>
 		<div class="col-lg-12" style="display:flex; justify-content:start;" >
 		<div class="info-box mb-6 "  style="background-color: #333c9e;">
 		<div class="member" style="display:flex; justify-content:center; color:white;">

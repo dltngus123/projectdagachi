@@ -53,6 +53,7 @@
    }
    
 </script>
+<div class="content-header">
 <h1>
    <a href='javascript:registBookMark("/approval/main", "전자결재 메인")'>
    <i class="fas fa-star bookmarkCheck"></i>
@@ -61,6 +62,7 @@
       전자 결재
       </span>
    </h1>
+</div>
   <div>
     <div class="card">
 	<div class="infobox" style="display:flex; justify-content:center; width:90%; margin:auto; margin-bottom:10px; margin-top:10px;">
@@ -147,7 +149,7 @@
 				</c:if>
               </div>
               
-                <div class="card-body" style="width:90%; margin:auto; height:25%; ">
+                <div class="card-body mx-auto" style="width:90%; height:25%; ">
              <a href="list?Type=approver&save=1"><h6 style="font-weight:bold;">내가 결재한/결재할 문서</h6></a>
               
               <c:if test="${approverList.size() ne 0 }">

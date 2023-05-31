@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@include file="/WEB-INF/jsp/include/openhead.jsp"%>
+<%@include file="/WEB-INF/jsp/include/openhead.jspf"%>
 	<div class="wrapper col-12" style="background: #f9f9f9;">
 	<section class="content-header">
         <div class="container-fluid">
@@ -17,7 +17,7 @@
                     </a>
                  </li>
                  <li class="breadcrumb-item active">
-                    주소록 상세조회
+                    사원 상세조회
                  </li>              
             </ol>
               </div>
@@ -26,10 +26,6 @@
         <hr/>
      </section>
      <section class="col-10 mx-auto content-body">
-     	<div class="btns row">
-     		<button type="button" class="btn bg-gradient col-sm-6" style="background: #5865F2; color:#ffffff;">공유</button>
-     		<button type="button" class="btn bg-gradient col-sm-6" style="background: #f1f1f1">개인</button>
-     	</div>
      	<div class="mt-4">
 
      		<div class="row">
@@ -91,7 +87,7 @@
      
      
 	
-<%@include file="/WEB-INF/jsp/include/openfoot.jsp"%>
+<%@include file="/WEB-INF/jsp/include/openfoot.jspf"%>
 <script>
 function deleteGo(phoneBookId){
 	if(!confirm('정말 삭제 하시겠습니까?')){

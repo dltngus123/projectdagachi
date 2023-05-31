@@ -6,7 +6,7 @@
 <%@include file="../include/head.jspf"%>
 <div class="content-wrapper mt-4" style="background-color:white;">
 
-
+<div class="content-header">
 <h1>
    <a href='javascript:registBookMark("/dagachi/proceeding/list", "회의록 전체 조회")'>
    <i class="fas fa-star bookmarkCheck"></i>
@@ -15,6 +15,7 @@
       회의록
       </span>
    </h1>
+</div>
 	<div class="col-12">
 	  <div class="card">
 	    <div class="card-header row">

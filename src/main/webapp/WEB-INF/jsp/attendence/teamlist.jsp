@@ -58,7 +58,7 @@
           <td>
             <c:if test="${department.name == Team.name && department.team == Team.team}">
               <c:set var="teamCount" value="${department.team_count}/${Team.team_count}" />
-              <a href="#" onclick="openwindow('/attendence/teamdetail?member_department=${department.name == '인사' ? 1 : department.name == '마케팅' ? 2 : department.name == '영업' ? 3 : department.name == '관리' ? 4 : ''}&member_team=${Team.team}&attendence_regDate=${department.attendence_regdate.toLocalDate().toString().substring(0, 10)}')">
+              <a href="#" onclick="OpenWindow('/attendence/teamdetail?member_department=${department.name == '인사' ? 1 : department.name == '마케팅' ? 2 : department.name == '영업' ? 3 : department.name == '관리' ? 4 : ''}&member_team=${Team.team}&attendence_regDate=${department.attendence_regdate.toLocalDate().toString().substring(0, 10)}','팀별 근태 조회',1000,700)">
   ${teamCount}
 </a>
 

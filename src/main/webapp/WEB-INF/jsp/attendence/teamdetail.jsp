@@ -59,7 +59,7 @@
 
 </div>
 
-<div class="card-body">
+<div class="card-body" style="overflow-y:scroll;">
 <table class="table table-fixed w-full">
 	<thead>
 		<tr>

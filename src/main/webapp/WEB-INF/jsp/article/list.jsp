@@ -14,6 +14,7 @@
 
 <div class="content-wrapper" style="background-color:white;">
 <div class="col-md-12">
+<div class="content-header">
 <h1>
    <a href='javascript:registBookMark("/article/list", "공유게시판 조회")'>
    <i class="fas fa-star bookmarkCheck"></i>
@@ -23,21 +24,24 @@
       </span>
    </h1>
 </div>
+</div>
 <div class="col-md-12" style="display:flex;">
 <div class="col-md-6">
-   <button onclick="write_go();" style="background-color:#5865F2; color:white; border:none;">글작성</button>
+   <button onclick="write_go();" class="btn btn-default col-sm-2" style="background-color:#5865F2; color:white;">글작성</button>
 </div>
 <div class="col-md-6">
- <form class="flex" style="text-align:right;margin-right:10px;">
-        <input type="hidden" name="article_id" value="${param.article_id}" />
-           <select name="searchKeywordTypeCode" data-value="${param.searchKeywordTypeCode }" id="" class="select select-bordered">
+ <form class="row" style="text-align:right;margin-right:10px;">
+        <input type="hidden" name="article_id" value="${param.article_id}"/>
+           <select name="searchKeywordTypeCode" data-value="${param.searchKeywordTypeCode }" id="" class="select select-bordered col-sm-3 form-control">
               <option disabled="disabled">검색타입</option>
               <option value="article_title">제목</option>
               <option value="article_regdate">작성일</option>
               <option value="article_register">작성자</option>
            </select>
-        <input name="searchKeyword" type="text" class="ml-2 w-72 input input-bordered" placeholder="검색어" maxlength="20" value="${param.searchKeyword }" />
-            <button type="submit" style="background-color:#5865F2; color:white; border:none;">검색</button>
+        <input name="searchKeyword" type="text" class="col-sm-8 form-control" placeholder="검색어" maxlength="20" value="${param.searchKeyword }" />
+            <button type="submit" class="btn btn-default form-control col-sm-1">
+            	<i class="fas fa-search"></i>
+            </button>
      </form>
 </div>
 </div>

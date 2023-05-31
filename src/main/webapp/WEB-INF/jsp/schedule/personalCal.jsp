@@ -287,6 +287,7 @@
 
 <div class="content-wrapper" style="background-color:white;">
 <div>
+<div class="content-header">
 	    		<h1>
    <a href='javascript:registBookMark("/schedule/personalCal", "개인 일정")'>
    <i class="fas fa-star bookmarkCheck"></i>
@@ -296,7 +297,8 @@
       </span>
    </h1>
 </div>
-  <div id="calendar"></div>
+</div>
+  <div id="calendar" class="mx-auto" style="max-height: 800px; max-width:1500px;"></div>
 
 <div class="modal fade" id="calendarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">

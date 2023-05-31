@@ -23,6 +23,7 @@
 <div class="content-wrapper" style="background-color:white;">	
 
 <div class="col-md-12">
+<div class="content-header">
     		<h1>
    <a href='javascript:registBookMark("/reservation/list", "회의실 예약 메인")'>
    <i class="fas fa-star bookmarkCheck"></i>
@@ -31,14 +32,15 @@
       회의실 예약
       </span>
    </h1>
+</div>
 	</div>
 		<c:if test="${loginUser.member_auth eq 2 or loginUser.member_auth eq 3}">
   <div id="btngroup" >
     <div class="insertbtn" style="margin: 10px;">
-      <button type="button" style="background-color:#717cfa; height:40px;  border-radius:5px;" data-toggle="modal" data-target="#insertroom">신규 회의실 등록</button>
+      <button type="button" style="background-color:#717cfa; height:40px;  border-radius:5px; border:0.3px solid;" data-toggle="modal" data-target="#insertroom">신규 회의실 등록</button>
     </div>
     <div class="modifybtn" style="margin: 10px;">
-      <button type="button" style="background-color:#ffd865;height:40px; border-radius:5px;" data-toggle="modal" data-target="#modifyroom">회의실 정보 수정</button>
+      <button type="button" style="background-color:#ffd865;height:40px; border-radius:5px; border:0.3px solid;" data-toggle="modal" data-target="#modifyroom">회의실 정보 수정</button>
     </div>
   </div>
 </c:if>
@@ -59,7 +61,7 @@
     <div style="flex-grow: 1; display: flex; flex-direction: column; align-items: center; width:200px;">
       <div style="flex-grow: 1;"></div>
       <c:forEach var="room" items="${room}">
-        <button class="room-button bg-Info badge-lg" style="background-color:#17a2b8; height:40px; margin-top:5px; margin-right:20px;border-radius:5px; "data-room-code="${room.room_code}" onclick="showEvents('${room.room_code}')">${room.room_name}</button>
+        <button class="btn room-button bg-primary btn-default" style="font-size:0.8rem; height:40px; margin-top:5px; margin-right:20px;border-radius:5px; "data-room-code="${room.room_code}" onclick="showEvents('${room.room_code}')">${room.room_name}</button>
       </c:forEach>
       <div style="flex-grow: 1;"></div>
     </div>

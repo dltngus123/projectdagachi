@@ -13,6 +13,7 @@
 </script>
 <div class="content-wrapper" style="background-color:white;">
 <div class="col-md-12">
+<div class="content-header">
 <h1>
    <a href='javascript:registBookMark("/notice/noticeList", "공지 조회")'>
    <i class="fas fa-star bookmarkCheck"></i>
@@ -22,21 +23,24 @@
       </span>
    </h1>
 </div>
+</div>
 <div class="col-md-12" style="display:flex;">
 <div class="col-md-6">
-	<button onclick="articleinsert();" style="background-color:#5865F2; color:white; border:none; margin-top:15px; margin-bottom:15px; margin-left:15px;">공지사항 등록</button>
+	<button class="btn" onclick="articleinsert();" style="background-color:#5865F2; color:white; border:none; margin-top:15px; margin-bottom:15px; margin-left:15px;">공지사항 등록</button>
 </div>
 <div class="col-md-6">
- <form class="flex" style="text-align:right;margin-right:10px;">
+ <form class="row" style="justify-content:flex-end;margin-right:10px;">
         <input type="hidden" name="article_id" value="${param.article_id}" />
-        	<select name="searchKeywordTypeCode" data-value="${param.searchKeywordTypeCode }" id="" class="select select-bordered">
+        	<select name="searchKeywordTypeCode" data-value="${param.searchKeywordTypeCode }" id="" class="select select-bordered col-sm-3 form-control">
 	           <option disabled="disabled">검색타입</option>
 	           <option value="article_title">제목</option>
 	           <option value="article_regdate">날짜</option>
 	           <option value="article_importent">중요도</option>
         	</select>
-        <input name="searchKeyword" type="text" class="ml-2 w-72 input input-bordered" placeholder="검색어" maxlength="20" value="${param.searchKeyword }" />
-      		<button type="submit" style="background-color:#5865F2; color:white; border:none;">검색</button>
+        <input name="searchKeyword" type="text" class="col-sm-8 form-control" placeholder="검색어" maxlength="20" value="${param.searchKeyword }" />
+      		<button type="submit" class="col-sm-1 form-control">
+      			<i class="fas fa-search"></i>
+      		</button>
      </form>
 </div>
 </div>

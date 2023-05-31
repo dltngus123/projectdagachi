@@ -28,6 +28,7 @@
 </style>
 
 <div class="content-wrapper">
+	
     <div class="card">
     	<div class="card-header">
     		<h5 style="padding:10px;">${title}</h5>

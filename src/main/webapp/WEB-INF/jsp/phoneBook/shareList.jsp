@@ -5,19 +5,34 @@
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@include file="../include/head.jspf"%>
    <div class="content-wrapper">
-   
+   <div class="content-header">
    <h1>
-      <i class="fas fa-star text-yellow"></i>
       <c:if test="${phoneBookType eq '1' }">
+      <a href='javascript:registBookMark("/dagachi/phoneBook/shiwList?phone_book_type=1", "공유 주소록")'>
+   <i class="fas fa-star bookmarkCheck"></i>
+   </a>
+      <span style="color: black;">
       공유 주소록
+      </span>
       </c:if>
       <c:if test="${phoneBookType eq '2' }">
+      <a href='javascript:registBookMark("/dagachi/phoneBook/shiwList?phone_book_type=2", "개인 주소록")'>
+   <i class="fas fa-star bookmarkCheck"></i>
+   </a>
+      <span style="color: black;">
       개인 주소록
+      </span>
       </c:if>
       <c:if test="${phoneBookType eq '3' }">
+      <a href='javascript:registBookMark("/dagachi/phoneBook/shiwList?phone_book_type=3", "주소록 휴지통")'>
+   <i class="fas fa-star bookmarkCheck"></i>
+   </a>
+      <span style="color: black;">
       주소록 휴지통
+      </span>
       </c:if>
    </h1>
+   </div>
    <div class="col-12">
      <div class="card">
        <div class="card-header row">
@@ -288,7 +303,8 @@ window.onload=function(){
       var favClass=$(favClassNameArr[j]).addClass("text-yellow");
       
    }
-   
+   bookMarkList();
+   checkedBookMark('/dagachi/phoneBook/showList');
    
 } 
 

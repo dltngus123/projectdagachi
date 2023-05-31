@@ -106,7 +106,7 @@
      
      <div class="col-sm-9 row mt-4 mx-auto justify-content-center">
      	<c:if test="${phoneBook.phone_Book_Type ne '3' }">
-	     	<button type="button" class="btn bg-gradient col-sm-2" onclick="location.href='modifyForm?phone_Book_Id=${phoneBook.phone_Book_Id}&phone_Book_Register=${phoneBook.phone_Book_Register}'" 
+	     	<button type="button" class="btn bg-gradient col-sm-2 mr-2" onclick="location.href='modifyForm?phone_Book_Id=${phoneBook.phone_Book_Id}&phone_Book_Register=${phoneBook.phone_Book_Register}'" 
 	     	style="background: #5865F2; color:#ffffff;">수정</button>
 	     	<button type="button" class="btn bg-gradient col-sm-2" onclick="deleteGo(${phoneBook.phone_Book_Id})"
 	     	style="background: #5865F2; color:#ffffff;">삭제</button>
