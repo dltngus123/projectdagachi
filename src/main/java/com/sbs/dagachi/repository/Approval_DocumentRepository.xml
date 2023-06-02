@@ -28,6 +28,14 @@
 		    approval_status = #{approval_status}
 		WHERE approval_id = #{approval_id}
 	</update>
+	<update id="updateLevel">
+	UPDATE APPROVAL_DOCUMENT
+	SET approval_level = 0
+	WHERE approval_id =#{approval_id}
+	
+	
+	
+	</update>
    <select id="getA_documentListByRegister" resultType="Approval_Document">
    		SELECT *
 		FROM APPROVAL_DOCUMENT

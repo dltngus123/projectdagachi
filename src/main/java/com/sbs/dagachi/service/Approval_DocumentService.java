@@ -64,7 +64,11 @@ public class Approval_DocumentService {
 		return approval_documentRepository.CountReceiveA_documentListByApprover(approval_approver, st, sk, status);
 	}
 	
-	
+	public void updateLevel(int approval_id) {
+		approval_documentRepository.updateLevel(approval_id);
+		
+	}
+
 	
 	
 	

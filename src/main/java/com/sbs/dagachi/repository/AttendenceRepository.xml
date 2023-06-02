@@ -509,7 +509,7 @@ FROM (
 </select>
 
 <select id="getTodaystatus4Count" resultType="int">
-SELECT SUM(team_count) AS total_team_count
+SELECT COALESCE(SUM(team_count),0) AS total_team_count
 FROM (
     SELECT a.attendence_regdate,
         CASE m.member_department 

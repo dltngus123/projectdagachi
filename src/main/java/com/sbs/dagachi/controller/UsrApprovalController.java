@@ -228,10 +228,13 @@ public class UsrApprovalController {
 		if(ap.getApproval_lastapprover().equals(approver) && status.equals("0")) {
 			approval_status=1;
 			approval_documentService.updateA_status(Integer.parseInt(approval_id), approval_status);
+			approval_documentService.updateLevel(Integer.parseInt(approval_id));
+			
 		}
 		if(status.equals("1")) {
 			approval_status=2;
 			approval_documentService.updateA_status(Integer.parseInt(approval_id), approval_status);
+			approval_documentService.updateLevel(Integer.parseInt(approval_id));
 		}
 		
 		model.addAttribute("approval_id",approval_id);

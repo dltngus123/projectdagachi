@@ -77,10 +77,9 @@ function MemberPictureThumb(contextPath){
       target.style.backgroundImage="url('"+contextPath+"/getPicture?id="+id+"')";            
       target.style.backgroundPosition="center";
       target.style.backgroundRepeat="no-repeat";
-      target.style.backgroundSize="cover";
+      target.style.backgroundSize="contain";
     }
 }
-
 function bookMarkList(){
             $.ajax({
                url:'/usr/home/favList',

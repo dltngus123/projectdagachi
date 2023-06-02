@@ -343,18 +343,20 @@
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
-      initialView: 'timeGridWeek',
-      headerToolbar: {
-        left: 'prev,next addEventButton addAllselect',
-        center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay'
-      },
-      navLinks: true,
-      selectable: true,
-      nowIndicator: true,
-      dayMaxEvents: true,
-      locale: 'ko',
-      selectMirror: true,
+    	  initialView: 'dayGridMonth',
+          headerToolbar: {
+              left: 'prev,next addEventButton addAllselect',
+              center: 'title',
+              right: 'dayGridMonth,timeGridWeek,timeGridDay'
+          },
+          slotMinTime: '08:00',
+          slotMaxTime: '22:00',
+          navLinks: true,
+          selectable: true,
+          nowIndicator: true,
+          dayMaxEvents: true,
+          locale: 'ko',
+          selectMirror: true,
       select: function(arg) {
         var title = prompt('Event Title:');
         if (title) {

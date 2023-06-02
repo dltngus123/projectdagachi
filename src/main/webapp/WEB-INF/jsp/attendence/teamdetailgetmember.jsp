@@ -77,7 +77,7 @@
 			<td>${TotalStatus7Count }</td>
 			<td id="totalwark"></td>
 			<td>${TotalStatus5Count }</td>
-			<td id="total">출근률</td>
+			<td id="total"></td>
 		</tr>
 	</tbody>
 </table>

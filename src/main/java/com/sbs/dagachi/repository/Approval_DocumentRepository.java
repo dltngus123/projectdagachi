@@ -19,5 +19,6 @@ public interface Approval_DocumentRepository {
 	int CountSaveDocument(String approval_register);
 	int CountA_documentListByRegister(String approval_register,String st,String sk,String status,int save);
 	int CountReceiveA_documentListByApprover(String approval_approver,String st,String sk,String status);
+	void updateLevel(int approval_id);
 	
 }

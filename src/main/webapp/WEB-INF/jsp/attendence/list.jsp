@@ -40,7 +40,7 @@
    </h1>
 </div>
 		<div class="col-lg-12" style="display:flex; justify-content:start;" >
-		<div class="info-box mb-6 "  style="background-color: #333c9e;">
+		<div class="info-box mb-6 "  style="background-color: #5865F2;">
 		<div class="member" style="display:flex; justify-content:center; color:white;">
 	
 		
@@ -69,7 +69,7 @@
 		</div>
 		</div>
 <div class="col-lg-6 col-6" style="margin-left: auto; text-align: center;">
-  <div class="inner" style="width: 800px; height: 100px; color: white; font-size: 1.2rem; display: flex;">
+  <div class="inner" style="height: 100px; color: white; font-size: 1.2rem; display: flex; justify-content:flex-end;">
     <input type="hidden" name="vacation_member" />
 
     <div class="rounded_div" style="margin-right: 50px;" onmouseout="this.style.backgroundColor= '#1d2472'"

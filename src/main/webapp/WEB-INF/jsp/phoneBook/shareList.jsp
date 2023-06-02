@@ -304,7 +304,7 @@ window.onload=function(){
       
    }
    bookMarkList();
-   checkedBookMark('/dagachi/phoneBook/showList');
+   checkedBookMark('/dagachi/phoneBook/showList?phone_book_type=1');
    
 } 
 

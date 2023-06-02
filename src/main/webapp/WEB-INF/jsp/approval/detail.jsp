@@ -165,7 +165,7 @@
 		  	</thead>
 		  	<tbody>
 		  		<tr>
-		  		<td style="width:100px;">${member1.member_name } ${member1.member_rank }</td>
+		  		<td style="width:120px;">${member1.member_name } ${member1.member_rank }</td>
 		  		<c:if test="${approvers[0].a_status eq null }">
 		  		<td> <span id="status3" class="badge bg-warning">대기</span></td>
 		  		</c:if>

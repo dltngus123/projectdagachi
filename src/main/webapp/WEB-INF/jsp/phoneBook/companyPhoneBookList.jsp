@@ -56,6 +56,7 @@
          <table class="table table-hover text-nowrap">
            <thead>
              <tr>
+                <th class="text-center">사진</th>
                <th>이름</th>
                  <th>전화번호</th>
                  <th>이메일</th>
@@ -67,6 +68,10 @@
            <tbody>
            <c:forEach var="companyPhone" items="${companyPhoneBookList }">
              <tr>
+              
+              <td class="manPicture" data-id="${companyPhone.member_id }">
+                       
+              </td>
               
               <td>
                  <a href="javascript:OpenWindow('companyPhoneBookDetail?member_id=${companyPhone.member_id }','주소록 상세조회',800,800);">
@@ -117,5 +122,9 @@ $( document ).ready( function() {
 function deleteChecked(){
    var checked=$('.ab').attr('checked');
    alert(checked);
+}
+
+window.onload=function(){
+   MemberPictureThumb('<%=request.getContextPath()%>');
 }
 </script>

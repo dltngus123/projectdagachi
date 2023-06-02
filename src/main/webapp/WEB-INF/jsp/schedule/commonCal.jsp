@@ -306,7 +306,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 
 
-  <div id="calendar" class="mx-auto" style="max-height: 800px; max-width:1500px;" ></div>
+  <div id="calendar" class="mx-auto" style="max-height: 600px; max-width:1000px;" ></div>
  
 
 <div class="modal fade" id="calendarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
