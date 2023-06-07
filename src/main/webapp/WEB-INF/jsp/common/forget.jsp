@@ -6,6 +6,11 @@
 
 <%@ include file="../include/openhead.jspf"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+
+<link href="https://cdn.jsdelivr.net/npm/daisyui@3.0.4/dist/full.css" rel="stylesheet" type="text/css" />
+<script src="https://cdn.tailwindcss.com"></script>
+
 <style>
 .card {
    
@@ -27,13 +32,13 @@ margin-left:20px;
 <div class="content-wrapper">
    <div class="card">
       <div class="card-header"
-         style="display: flex; justify-content: center; margin-top: 20px;">
-         <h3 class="text-bold">ID/PWD 찾기
+         style="display: flex; justify-content: center;">
+         <h3 class="text-bold text-4xl">ID/PWD 찾기
          <i class="fas fa-search"></i>
          </h3>
       </div>
       <div class="card-body" style="background-color: #f1f1f1;">
-<div  class="card card-primary mx-auto" style="width: 600px;">
+<%-- <div  class="card card-primary mx-auto" style="width: 600px;">
     <div class="card-header" style="width:100%;">
         <h4 class="card-title">아이디 찾기</h4>
     </div>
@@ -54,10 +59,10 @@ margin-left:20px;
     </div>
     </div>
 
-</div>
+</div> --%>
 
 
-<div class="card card-primary mx-auto" style="width: 600px;">
+<%-- <div class="card card-primary mx-auto" style="width: 600px;">
     <div class="card-header" style="width:100%; ">
         <h4 class="card-title">비밀번호 찾기</h4>
     </div>
@@ -91,14 +96,67 @@ margin-left:20px;
     </div>
    
 
-</div>
-      <div style="margin-right:50px;display:flex; justify-content:flex-end;">
-      <button onclick="window.close()"class="btn btn-block btn-secondary col-sm-2" style="width:60px; height:40px;">닫기</button>
-      </div>
+</div> --%>
+    
 
+   
+   
+   
+   
+   
+      <div class="card md:card-side bg-base-100 shadow-xl h-1/2">
+  <div class="flex justify-center items-center border-r border-gray-700 bg-blue-100 rounded-l-2xl">
+     <h1 class="font-bold text-2xl p-8 cl-signature text-gray-500">&nbsp;&nbsp;아이디 찾기&nbsp;&nbsp;&nbsp;</h1>
+  </div>
+  <div class="card-body">
+    <form id="id"action="findId" method="post">
+      <div class="font-bold">이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" placeholder="이름을 입력해 주세요" name="name" class="input input-bordered w-60 w-full max-w-xs" /></div>
+         </br>
+      <div class="font-bold">전화번호<input type="text" placeholder="ex)010-0000-0000" name="phone" class="input input-bordered w-60 w-full max-w-xs" /></div>
+      </br>
+      <div class="font-bold">이메일&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"  name="email"placeholder="example@xxxx.com" class="input input-bordered w-full max-w-xs" /></div>
+       </br>
+       <div style="margin-right:50px;display:flex; justify-content:flex-end;">
+       <button type="button"onclick="idfind_go()"class="btn btn-block btn-primary col-sm-3">ID찾기</button>
+       </div>
+      </form> 
+    
+  </div>
+</div>
+
+
+
+   
+      <div class="card md:card-side bg-base-100 shadow-xl h-1/2">
+  <div class="flex justify-center items-center border-r border-gray-700 bg-blue-100 rounded-l-2xl">
+     <h1 class="font-bold text-2xl p-8 cl-signature text-gray-500">비밀번호 찾기</h1>
+  </div>
+  <div class="card-body">
+      <form id="pwd" method="post" action="findPwd">
+      <div class="font-bold">아이디&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="id" placeholder="아이디를 입력해 주세요" class="input input-bordered w-60 w-full max-w-xs" /></div>
+         </br>
+      <div class="font-bold">이름&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text"  name="nameForPwd" placeholder="이름을 입력해 주세요" class="input input-bordered w-60 w-full max-w-xs" /></div>
+      </br>
+      <div class="font-bold">전화번호<input type="text" placeholder="ex)010-0000-0000" name="phoneForPwd" class="input input-bordered w-full max-w-xs" /></div>
+       </br>
+       <div class="font-bold">이메일&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" placeholder="example@xxxx.com" name="emailForPwd" class="input input-bordered w-full max-w-xs" /></div>
+       </br>
+       <div style="margin-right: 50px; display: flex; justify-content: flex-end;">
+        <button type="button" onclick="pwdfind_go()"class="btn btn-block btn-primary col-sm-3" style="height: 40px;">PWD 찾기</button>
+       </div>
+      </form> 
+    
+  </div>
+</div>
+   
+     <div style="margin-right:50px;display:flex; justify-content:flex-end;">
+      <button onclick="window.close()"class="btn btn-active btn-ghost col-sm-2" style="width:60px; height:40px;">닫기</button>
       </div>
       
+         </div>
+      
    </div>
+   
 </div>
 
 

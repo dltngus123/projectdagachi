@@ -187,8 +187,11 @@
                           <td><a href="/dagachi/projectS/list" onclick="" style="color:black;">${test.ps_title}</a></td>
                           <fmt:formatDate value="${test.ps_EndDate}" var="endDate" pattern="yyyy.MM.dd"/>
                           <td>${endDate}</td>
-                          
-                          <td>${test.ps_Sender}</td>
+                          <c:forEach items="${memberList }" var="member">
+                          <c:if test="${test.ps_Sender eq member.member_id }">
+                          <td>${member.member_name}</td>
+                          </c:if>
+                          </c:forEach>
                         </tr>
                         <c:set var="count" value="${count + 1}" />
                       </c:if>

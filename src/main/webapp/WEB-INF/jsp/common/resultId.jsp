@@ -6,6 +6,10 @@
 
 <%@ include file="../include/openhead.jspf"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<link href="https://cdn.jsdelivr.net/npm/daisyui@3.0.4/dist/full.css" rel="stylesheet" type="text/css" />
+<script src="https://cdn.tailwindcss.com"></script>
+
 <style>
 div.card-header{
 	border-style:2px outset black;
@@ -36,10 +40,10 @@ div>p{
 	color:blue;
 }
 </style>
-<div class="content-wrapper">
+<div class="content-wrapper bg-white">
 	
 	<div style="text-align:center;">
-  <p style="margin:0; font-size:30px; ">아이디 찾기</p>
+  <p class="text-blue-600 mt-4">아이디 찾기</p>
   </br>
 </div>
 <div class="card border-success mb-3" style="width:500px;height:500px; margin:0 auto;">
@@ -48,12 +52,14 @@ div>p{
   <div class="resultid">
   		회원님의 찾으신 아이디는
   		<br/>
+  		<br/>
+  		<br/>
   		<p>${member.member_id}</p> 입니다.
   </div>     
     </div>
     <div class="footer-btn">
-	<button onclick="window.close()" type="button" class="btn btn-block btn-success btn-sm" style="background-color:gray;width:150px; height:40px; margin:0">닫기</button>
-	<button onclick="location.href='../common/forget'"type="button" class="btn btn-block btn-success btn-sm" style="width:150px; height:40px; margin:0">비밀번호찾기</button>
+    <button onclick="window.close()"class="btn btn-outline btn-ghost btn-sm" style="width:150px; height:40px;">닫기</button>
+	<button onclick="location.href='../common/forget'"type="button" class="btn btn-outline btn-primary btn-sm" style="width:150px; height:40px; margin:0">비밀번호찾기</button>
   </div>
   </div>
 	
